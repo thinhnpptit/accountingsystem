@@ -1,7 +1,7 @@
 # Accounting System:
 A major exercise to management information systems
 
-#How to start the project:
+# How to start the project:
 Step1: Do something with laravel framework:
 - Clone the Repo
 - Make sure you have wamp or xamp or lamp
