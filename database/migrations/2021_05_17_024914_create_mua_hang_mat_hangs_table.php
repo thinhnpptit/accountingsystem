@@ -15,6 +15,8 @@ class CreateMuaHangMatHangsTable extends Migration
     {
         Schema::create('mua_hang_mat_hangs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('mathang_id');
+            $table->integer('phieumuahang_id');
             $table->timestamps();
         });
     }

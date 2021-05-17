@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RecordsSeeder::class);
         $this->call(SubaccountsSeeder::class);
         $this->call(PhieuMuaHangTableSeeder::class);
+        $this->call(MatHangTableSeeder::class);
+        $this->call(MuaHangMatHangTableSeeder::class);
 
         User::create([
             'name' => 'admin',
