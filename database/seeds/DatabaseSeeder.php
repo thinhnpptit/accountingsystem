@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ReceiptsSeeder::class);
         $this->call(RecordsSeeder::class);
         $this->call(SubaccountsSeeder::class);
+        $this->call(PhieuMuaHangTableSeeder::class);
 
         User::create([
             'name' => 'admin',
@@ -34,7 +35,5 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'email' => 'me@example.com'
         ]);
-
-
     }
 }
