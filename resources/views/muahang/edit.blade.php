@@ -22,10 +22,12 @@
 <div class="col-lg-12">
     <div class="block">
     
-        <div class="title"><strong>Print Phiếu mua hàng</strong></div>
+        <div class="title"><strong>Sửa Phiếu mua hàng</strong></div>
         <div class="block-body">
-            <form name="form" id="showform" action="" method="post" class="form-horizontal">
-                <div id="printJS-form">
+          <form name="form" id="muahang" action="{{ route("muahang.update", $muahang->id)}}" method="post" class="form-horizontal">
+            @method('PATCH')
+            @csrf
+                <div id="HTMLtoPDF">
                 <link rel="stylesheet" href="/core/vendor/bootstrap/css/bootstrap.min.css">
 
                     <div class="form-group row">
@@ -33,13 +35,16 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="col-md-4 control-label" for="selectbasic">No</label>
-                                     <input class="form-control" value="{{ $muahang->id }}">
+                                     <input class="form-control" value="{{ $muahang->id }}" readonly>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="col-md-4 control-label" for="selectbasic"
                                         class="form-control">Phân loại</label>
-                                    <input type="text" id="chartvalue" name="phanloai" class="form-control"
-                                        value="{{ $muahang->phan_loai }}">
+                                        <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
+                                            class="form-control">
+                                            <option value="Mua hàng trong nước nhập kho">{ Mua hàng trong nước nhập kho }</option>
+                                            <option value="Mua hàng trong nước không qua kho">{ Mua hàng trong nước không qua kho }</option>
+                                        </select>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +61,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Ngày mua</label>
-                                    <input type="text" id="chartvalue" name="ngaymua" class="form-control"
+                                    <input type="date" id="chartvalue" name="ngaymua" class="form-control"
                                         value="{{ $muahang->ngay_mua }}">
                                 </div>
                                 {{-- <div class="col-md-3">
@@ -74,35 +79,26 @@
                                     <label class="col-md-8 control-label" for="selectbasic">Tổng tiền</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">{{ $muahang->thanh_tien }}
-                                    </label>
+                                    {{-- <label class="col-md-8 control-label" for="selectbasic">{{ $muahang->thanh_tien }}
+                                    </label> --}}
+                                    <input class="form-control" type="text" name="thanhtien" class="form-control"
+                                      value=" {{ $muahang->thanh_tien }} " >
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="form-group row">
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-9 control-label" for="selectbasic">Through</label>
 
-                                    <input type="text" id="chartvalue" name="chartvalue" class="form-control"
-                                        value="{{ $muahang->by}}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <label class="col-md-1 form-control-label">Description</label>
-                    <textarea class="col-sm-5 form-control" id="description"
-                        name="description">{{ $muahang->Description }}</textarea> --}}
-
+                    <div class="form-group row" id='buttons'>
+                      <div class="col-sm-12 ml-auto">
+                          <button type="button" onclick="showAll()" class="btn btn-secondary">Cancel</button>
+                          <button type="submit" class="btn btn-primary" name="btnadd" id="btnadd">Update</button>
+                      </div>
+                  </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary" style="height:41px ; width:101px ;margin: auto"
-    onclick="printData()">Print Form</button>
 @endsection
 
 @section('footer')

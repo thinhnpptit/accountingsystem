@@ -189,7 +189,7 @@
                     <!-- Page Header-->
                     <div class="page-header no-margin-bottom">
                         <div class="container-fluid">
-                            <h2 class="h5 no-margin-bottom">Super Sami Accounting Managements</h2>
+                            <h2 class="h5 no-margin-bottom">Accounting Managements</h2>
                         </div>
                     </div>
                     <!-- Breadcrumb-->
@@ -246,9 +246,7 @@
                         <div class="footer__block block no-margin-bottom">
                             <div class="container-fluid text-center">
                                 <!-- Please do not remove the backlink to us unless you support us at https://super-sami.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                                <p class="no-margin-bottom">2020&copy; Super-Sami Design by <a
-                                        href="https://super-sami.com">Raja Osama
-                                        - Theme used of Bootstrap</a>.</p>
+                                <p class="no-margin-bottom">2021&copy;Design by group 1.2</p>
                             </div>
                         </div>
                     </footer>

@@ -49,12 +49,12 @@
                                     <label class="col-md-4 control-label" for="selectbasic">Customer</label>
                                     <select id="Customer" name="Customer" class="form-control">
                                         <option >Select Option</option>
-                                        @foreach (\App\Account::where('name','=',
+                                        {{-- @foreach (\App\Account::where('name','=',
                                         'A/c Receivable')->take(1)->first()->subaccounts()->get()
                                         as $subaccount)
                                         <option value="{{ $subaccount->subid }}"  {{ ($subaccount->accountname == \App\Subaccount::find($invoice->Customer)->accountname ) ? 'selected' : ''}}    >{{ $subaccount->accountname }}
                                         </option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
 

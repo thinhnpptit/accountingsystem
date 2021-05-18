@@ -52,8 +52,8 @@
                                     </td>
                                     <td class="table-active">{{ $inv->id  }}</td>
                                     <td class="table-secondary">{{ $inv->Date   }}</td>
-                                    <td>{{ \App\Account::find($inv->Bill)->name   }}</td>
-                                    <td>{{ \App\Subaccount::find($inv->Customer)->accountname  }}</td>
+                                    {{-- <td>{{ \App\Account::find($inv->Bill)->name   }}</td>
+                                    <td>{{ \App\Subaccount::find($inv->Customer)->accountname  }}</td> --}}
                            
                                     <td class="table-active" style='text-align:right'>{{ $inv->Total   }}</td>
                                 </tr>

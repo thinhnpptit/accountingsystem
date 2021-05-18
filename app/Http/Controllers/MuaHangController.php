@@ -46,11 +46,11 @@ class MuaHangController extends Controller
         // $phieumh->nha_cc = $request->nhacc;
         $phieumh->so_luong = $request->soluong;
         $phieumh->thanh_tien = $request->thanhtien;
-        $phieumh->ngay_mua = $request->ngay;
+        $phieumh->ngay_mua = $request->ngaymua;
 
         $phieumh->save();
 
-        return view('muahang.create')->with('Add success');
+        return redirect()->route('muahang.index')->with('Add success');
     }
 
     /**
@@ -77,6 +77,9 @@ class MuaHangController extends Controller
     public function edit($id)
     {
         //
+        $muahang = PhieuMuaHang::find($id);
+
+        return view('muahang.edit', compact('muahang'));
     }
 
     /**
@@ -89,6 +92,17 @@ class MuaHangController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $phieumh = PhieuMuaHang::find($id);
+        $phieumh->phan_loai = $request->phanloai;
+        // $phieumh->nha_cc = $request->nhacc;
+        $phieumh->so_luong = $request->soluong;
+        $phieumh->thanh_tien = $request->thanhtien;
+        $phieumh->ngay_mua = $request->ngaymua;
+
+        $phieumh->save();
+
+        $message = "Phiếu mua hàng với id = " . $phieumh->id . " được cập nhật thành công";
+        return redirect()->route('muahang.index')->with(compact($message));
     }
 
     /**
@@ -100,5 +114,9 @@ class MuaHangController extends Controller
     public function destroy($id)
     {
         //
+        $muahang = PhieuMuaHang::find($id);
+        $muahang->delete();
+
+        return redirect()->route('muahang.index')->with('Delete successfully');
     }
 }

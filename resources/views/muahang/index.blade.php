@@ -29,6 +29,7 @@
                                     <th>Ngày mua</th>
                                     <th>Tổng tiền</th>
                                     <th>Print</th>
+                                    <th>Edit/Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,20 @@
                                     <td>{{ $p->ngay_mua   }}</td>
                                     <td class="table-active">{{ $p->thanh_tien   }}</td>
                                     <td><a href="{{ route('muahang.show',$p->id)}}">Print</a> </td>
+                                    <td>
+                                        <a href="{{ route('muahang.edit', $p->id)}}">Edit</a> |
+                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Delete</a>
+                                        <div style='display=none'>
+                                            <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('muahang.destroy', $p->id)}}" >
+                                                @method('DELETE')
+                                                @csrf
+                                                
+                                            {{-- @if ($p->Bill == 10)
+                                             <input name="cust" style="display:none" value="true" type="text"/>
+                                             @endif --}}
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

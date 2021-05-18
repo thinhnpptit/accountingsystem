@@ -28,7 +28,7 @@
                                 <div class="col-md-4">
                                     <label class="col-md-4 control-label" for="selectbasic"
                                         class="form-control">Ngày</label>
-                                    <input type="date" id="datevalue" name="ngay" class="form-control"
+                                    <input type="date" id="datevalue" name="ngaymua" class="form-control"
                                         value="{{ old('datevalue') ?? "2021-00-00 " }}" 
                                          />
                                 </div>
@@ -42,7 +42,7 @@
 
                                 <div class="col-md-3">                     
 
-                                  <label class="col-md-4 control-label" for="selectbasic">Nhà cung cấp</label>
+                                  <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
                                   <input class="form-control" type="text" name="nhaCC">
 
                                         {{-- NhaCC --}}
@@ -51,7 +51,6 @@
                                         </option>
                                         @endforeach --}}
 
-                                    </select>
                                 </div>
 
                                 <div class="col-md-3">
