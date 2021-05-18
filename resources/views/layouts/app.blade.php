@@ -132,10 +132,10 @@
                         </div>
                     </div>
 
-                    <span class="heading">Main</span>
+                    <span class="heading">Nghiệp vụ</span>
                     <ul class="list-unstyled">
-                        <li {{ activeIfRoute('payments.create') }}><a href="{{ route('payments.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Payment Voucher </a></li>
+                        <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
+                                    class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
                         <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
                                     class="fa fa-file-text-o"></i>Receipt Voucher </a></li>
                         <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
@@ -159,12 +159,12 @@
                             </ul>
                         </li>
                         <li
-                            {{ activeIfRoute(['receipts.index','payments.index','adjustments.index','invoices.index'] )}}>
+                            {{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] )}}>
                             <a href="ul#Records" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>All Records</a>
                             <ul id="Records" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('payments.index') }}><a
-                                        href="{{ route('payments.index') }}">Payment
+                                <li {{ activeIfRoute('muahang.index') }}><a
+                                        href="{{ route('muahang.index') }}">Payment
                                         Voucher
                                         Records</a></li>
                                 <li {{ activeIfRoute('receipts.index') }}><a
@@ -281,7 +281,7 @@
         if ('{{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create']) }}') {
             setTimeout(function() { $('ul#Accounts').addClass('show'); } ,200);
         }
-        if ('{{ activeIfRoute(['receipts.index','payments.index','adjustments.index','invoices.index'] ) }}') {
+        if ('{{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] ) }}') {
             setTimeout(function() { $('ul#Records').addClass('show') } ,200);
         }
 
