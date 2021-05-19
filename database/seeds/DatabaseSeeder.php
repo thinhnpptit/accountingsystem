@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ReceiptsSeeder::class);
         $this->call(RecordsSeeder::class);
         $this->call(SubaccountsSeeder::class);
+        $this->call(PhieuMuaHangTableSeeder::class);
+        $this->call(MatHangTableSeeder::class);
+        $this->call(MuaHangMatHangTableSeeder::class);
+        $this->call(TaiKhoanTableSeeder::class);
+        $this->call(ViTriTableSeeder::class);
+        $this->call(NhanVienTableSeeder::class);
 
         User::create([
             'name' => 'admin',
@@ -34,7 +40,5 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'email' => 'me@example.com'
         ]);
-
-
     }
 }

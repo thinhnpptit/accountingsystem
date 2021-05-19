@@ -3,8 +3,11 @@
 use App\Account;
 use App\Subaccount;
 use App\Chartaccount;
+use App\Http\Controllers\MuaHangController;
+use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,32 +28,32 @@ Route::group(
         Route::get(
             '/',
             function () {
-                return redirect()->route('payments.create');
+                return redirect()->route('muahang.create');
             }
         );
 
         Route::get(
             '/home',
             function () {
-                return redirect()->route('payments.create');
+                return redirect()->route('muahang.create');
             }
         );
 
-        foreach (['payment', 'receipt', 'adjustment'] as $resource) {
-            $prefix=Str::plural($resource);
+        foreach (['muahang', 'receipt', 'adjustment'] as $resource) {
+            $prefix = Str::plural($resource);
             $controller = ucfirst($resource) . 'Controller';
-            Route::resource($prefix, $controller)->except(['edit', 'update','destroy']);
+            Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
 
         Route::resource('invoices', 'InvoiceController');
-    
+
         Route::resource('ledger', 'Ledger');
         Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
 
 
 
         foreach (['account', 'chartaccount', 'subaccount'] as $resource) {
-            $prefix=Str::plural($resource);
+            $prefix = Str::plural($resource);
             $controller = ucfirst($resource) . 'Controller';
             Route::resource($prefix, $controller)->except(['show']);
         }
@@ -105,11 +108,11 @@ Route::middleware('auth')->prefix('api/')->group(
             function (Request $request) {
                 $account_id = request('account_id');
                 Log::debug($account_id);
-                $account=Account::find($account_id);
+                $account = Account::find($account_id);
                 if ($account) {
                     $subaccounts = $account->subaccounts;
                 } else {
-                    $subaccounts=[];
+                    $subaccounts = [];
                 }
                 return compact('account_id', 'account', 'subaccounts');
             }
@@ -130,6 +133,8 @@ Route::fallback(
     }
 );
 
+
+Route::resource('/muahang', 'MuaHangController');
 
 // Verb        Path                            Action  Route Name
 // -------------------------------------------------------------------

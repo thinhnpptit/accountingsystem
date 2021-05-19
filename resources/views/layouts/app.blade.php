@@ -132,10 +132,10 @@
                         </div>
                     </div>
 
-                    <span class="heading">Main</span>
+                    <span class="heading">Nghiệp vụ</span>
                     <ul class="list-unstyled">
-                        <li {{ activeIfRoute('payments.create') }}><a href="{{ route('payments.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Payment Voucher </a></li>
+                        <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
+                                    class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
                         <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
                                     class="fa fa-file-text-o"></i>Receipt Voucher </a></li>
                         <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
@@ -159,12 +159,12 @@
                             </ul>
                         </li>
                         <li
-                            {{ activeIfRoute(['receipts.index','payments.index','adjustments.index','invoices.index'] )}}>
+                            {{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] )}}>
                             <a href="ul#Records" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>All Records</a>
                             <ul id="Records" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('payments.index') }}><a
-                                        href="{{ route('payments.index') }}">Payment
+                                <li {{ activeIfRoute('muahang.index') }}><a
+                                        href="{{ route('muahang.index') }}">Payment
                                         Voucher
                                         Records</a></li>
                                 <li {{ activeIfRoute('receipts.index') }}><a
@@ -189,7 +189,7 @@
                     <!-- Page Header-->
                     <div class="page-header no-margin-bottom">
                         <div class="container-fluid">
-                            <h2 class="h5 no-margin-bottom">Super Sami Accounting Managements</h2>
+                            <h2 class="h5 no-margin-bottom">Accounting Managements</h2>
                         </div>
                     </div>
                     <!-- Breadcrumb-->
@@ -246,9 +246,7 @@
                         <div class="footer__block block no-margin-bottom">
                             <div class="container-fluid text-center">
                                 <!-- Please do not remove the backlink to us unless you support us at https://super-sami.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                                <p class="no-margin-bottom">2020&copy; Super-Sami Design by <a
-                                        href="https://super-sami.com">Raja Osama
-                                        - Theme used of Bootstrap</a>.</p>
+                                <p class="no-margin-bottom">2021&copy;Design by group 1.2</p>
                             </div>
                         </div>
                     </footer>
@@ -281,7 +279,7 @@
         if ('{{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create']) }}') {
             setTimeout(function() { $('ul#Accounts').addClass('show'); } ,200);
         }
-        if ('{{ activeIfRoute(['receipts.index','payments.index','adjustments.index','invoices.index'] ) }}') {
+        if ('{{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] ) }}') {
             setTimeout(function() { $('ul#Records').addClass('show') } ,200);
         }
 

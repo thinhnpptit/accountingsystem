@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Invoices</title>
+<title>Danh sách phiếu mua hàng</title>
 @section('header')
 
 <link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
@@ -14,54 +14,55 @@
 @section('content')
 <div class="col-lg-12" cloak>
     <div class="block">
-        <div class="title"><strong>Invoices</strong></div>
+        <div class="title"><strong>Danh sách phiếu mua hàng</strong></div>
         <div class="block-body">
+            <form name="form" id="form1" action="" method="post">
                 <br>
-                <div id="txtshow">
+                <div align="center" id="txtshow">
                     <div class="table-responsive">
                         <table id="tables" class="display">
                             <thead>
                                 <tr class="table-active">
+                                    <th class="table-danger">ID</th>
+                                    <th>Phân loại</th>
+                                    <th>Số lượng</th>
+                                    <th>Ngày mua</th>
+                                    <th>Tổng tiền</th>
                                     <th>Print</th>
-                                    <th>Edit|Delete </th>
-                                    <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Bill</th>
-                                    <th>Customer</th>
-                     
-                                    <th>Total</th>
+                                    <th>Edit/Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($invoices as $inv)
+                                @foreach ($muahang as $p)
                                 <tr>
-                                    <td><a href="{{ route('invoices.show',$inv->id)}}">Print</a> </td>
+                                    <td class="table-active">{{ $p->id  }}</td>
+                                    <td class="table-secondary">{{ $p->phan_loai   }}</td>
+                                    {{-- <td>{{ \App\Account::find($p->mainaccount)->name   }}</td> --}}
+                                    <td>{{ $p->so_luong   }}</td>
+                                    <td>{{ $p->ngay_mua   }}</td>
+                                    <td class="table-active">{{ $p->thanh_tien   }}</td>
+                                    <td><a href="{{ route('muahang.show',$p->id)}}">Print</a> </td>
                                     <td>
-                                        <a href="{{ route('invoices.edit', $inv->id)}}">Edit</a> |
-                                        <a href="#" onclick="$('form#invoice_delete_{{$inv->id}}').trigger('submit')">Delete</a>
+                                        <a href="{{ route('muahang.edit', $p->id)}}">Edit</a> |
+                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Delete</a>
                                         <div style='display=none'>
-                                            <form id='invoice_delete_{{$inv->id}}' method='POST' action="{{ route('invoices.destroy', $inv->id)}}" >
+                                            <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('muahang.destroy', $p->id)}}" >
                                                 @method('DELETE')
                                                 @csrf
                                                 
-                                            @if ($inv->Bill == 10)
+                                            {{-- @if ($p->Bill == 10)
                                              <input name="cust" style="display:none" value="true" type="text"/>
-                                             @endif
+                                             @endif --}}
                                             </form>
                                         </div>
                                     </td>
-                                    <td class="table-active">{{ $inv->id  }}</td>
-                                    <td class="table-secondary">{{ $inv->Date   }}</td>
-                                    {{-- <td>{{ \App\Account::find($inv->Bill)->name   }}</td>
-                                    <td>{{ \App\Subaccount::find($inv->Customer)->accountname  }}</td> --}}
-                           
-                                    <td class="table-active" style='text-align:right'>{{ $inv->Total   }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </form>
         </div>
     </div>
 </div>
@@ -82,7 +83,6 @@
 
 <script>
     $(document).ready( function () {
-        $('[cloak]').removeAttr('cloak');
         $('#tables').DataTable({
             dom: 'Bfrtip',
             buttons: [
@@ -92,6 +92,7 @@
                 'pdfHtml5'
             ]
         });
+        $('[cloak]').removeAttr('cloak');
     } );
 </script>
 

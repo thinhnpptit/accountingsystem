@@ -20,10 +20,10 @@ class AdjustmentController extends Controller
      */
     public function index()
     {
-        $adjustments=Adjustment::all();
+        $adjustments = Adjustment::all();
         return view('adjustment.index', compact('adjustments'));
     }
- 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,25 +42,25 @@ class AdjustmentController extends Controller
      */
     public function store(AdjustmentRequest $request)
     {
-        $message='';
+        $message = '';
         DB::transaction(function () use ($request, &$message) {
-            $date=$request->datevalue;
-            $chart_id=$request->chartvalue;
-            $account_id=$request->mainvalue;
-            $subaccount_id=$request->subvalue;
-            $amount=$request->value;
-            $chart1_id=$request->chartvalue1;
-            $account1_id=$request->mainvalue1;
-            $subaccount1_id=$request->subvalue1;
-            $amount1=$request->value1;
-            $description=$request->description;
-            $chartaccount=$chart_id;
-            $mainaccount=$account_id;
-            $subaccount=$subaccount_id;
-            $chartaccount1=$chart1_id;
-            $mainaccount1=$account1_id;
-            $subaccount1=$subaccount1_id;
-            $data=compact(
+            $date = $request->datevalue;
+            $chart_id = $request->chartvalue;
+            $account_id = $request->mainvalue;
+            $subaccount_id = $request->subvalue;
+            $amount = $request->value;
+            $chart1_id = $request->chartvalue1;
+            $account1_id = $request->mainvalue1;
+            $subaccount1_id = $request->subvalue1;
+            $amount1 = $request->value1;
+            $description = $request->description;
+            $chartaccount = $chart_id;
+            $mainaccount = $account_id;
+            $subaccount = $subaccount_id;
+            $chartaccount1 = $chart1_id;
+            $mainaccount1 = $account1_id;
+            $subaccount1 = $subaccount1_id;
+            $data = compact(
                 'date',
                 'chartaccount',
                 'mainaccount',
@@ -70,12 +70,12 @@ class AdjustmentController extends Controller
                 'mainaccount1',
                 'subaccount1',
                 'amount1',
-                'description',
+                'description'
             );
             // dd($data);
-            $adjustment=Adjustment::create($data);
+            $adjustment = Adjustment::create($data);
             $adjustment->transact();
-            $message='Adjustment with id '. $adjustment->id . ' was created';
+            $message = 'Adjustment with id ' . $adjustment->id . ' was created';
         });
         return redirect()->route('adjustments.create')->with(compact('message'));
     }
