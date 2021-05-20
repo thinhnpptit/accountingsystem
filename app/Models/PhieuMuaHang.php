@@ -13,4 +13,9 @@ class PhieuMuaHang extends Model
         'thanhtien',
         'ngaymua',
     ];
+
+    public function nhanvien()
+    {
+        return $this->belongsTo(NhanVien::class);
+    }
 }

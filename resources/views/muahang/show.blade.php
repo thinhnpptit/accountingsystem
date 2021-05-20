@@ -21,7 +21,7 @@
 @section('content')
 <div class="col-lg-12">
     <div class="block">
-    
+
         <div class="title"><strong>Print Phiếu mua hàng</strong></div>
         <div class="block-body">
             <form name="form" id="showform" action="" method="post" class="form-horizontal">
@@ -61,12 +61,12 @@
                                 </div>
                                 {{-- <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">SubAccount</label>
-                                
+
                                 </div> --}}
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="row">
@@ -74,27 +74,21 @@
                                     <label class="col-md-8 control-label" for="selectbasic">Tổng tiền</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">{{ $muahang->thanh_tien }}
-                                    </label>
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhân viên</label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    {{-- <div class="form-group row">
-                        <div class="col-md-9">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-9 control-label" for="selectbasic">Through</label>
-
-                                    <input type="text" id="chartvalue" name="chartvalue" class="form-control"
-                                        value="{{ $muahang->by}}">
+                                <div class="col-md-3">
+                                    <input type="text" id="chartvalue" name="thanhtien" class="form-control"
+                                        value="{{ $muahang->thanh_tien }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="chartvalue" name="nhanvien" class="form-control"
+                                        value="{{ $muahang->nhanvien->tenNV }}">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <label class="col-md-1 form-control-label">Description</label>
-                    <textarea class="col-sm-5 form-control" id="description"
-                        name="description">{{ $muahang->Description }}</textarea> --}}
 
                 </div>
             </form>
@@ -116,7 +110,7 @@
     $( function(){
         $('form#showform input', ).prop('readonly',true);
         $('form#showform textarea', ).prop('readonly',true);
-    
+
 
     });
 
@@ -131,7 +125,7 @@
    newWin.print();
      newWin.close();
   }, 500);
- 
+
 }
 </script>
 @endsection

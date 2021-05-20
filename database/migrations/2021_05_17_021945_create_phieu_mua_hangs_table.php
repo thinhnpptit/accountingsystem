@@ -20,6 +20,7 @@ class CreatePhieuMuaHangsTable extends Migration
             $table->float('thanh_tien');
             $table->date('ngay_mua');
             $table->integer('hoadon_id')->default(1);
+            $table->integer('nhanvien_id');
             $table->timestamps();
         });
     }

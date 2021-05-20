@@ -20,8 +20,8 @@
                                     <label class="col-md-4 control-label" for="selectbasic">Phân loại</label>
                                     <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
                                         class="form-control">
-                                        <option value="Mua hàng trong nước nhập kho">{ Mua hàng trong nước nhập kho }</option>
-                                        <option value="Mua hàng trong nước không qua kho">{ Mua hàng trong nước không qua kho }</option>
+                                        <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
+                                        <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
                                     </select>
 
                                 </div>
@@ -29,7 +29,7 @@
                                     <label class="col-md-4 control-label" for="selectbasic"
                                         class="form-control">Ngày</label>
                                     <input type="date" id="datevalue" name="ngaymua" class="form-control"
-                                        value="{{ old('datevalue') ?? "2021-00-00 " }}" 
+                                        value="{{ old('datevalue') ?? "2021-00-00 " }}"
                                          />
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                         <div class="col-sm-12">
                             <div class="row">
 
-                                <div class="col-md-3">                     
+                                <div class="col-md-3">
 
                                   <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
                                   <input class="form-control" type="text" name="nhaCC">
@@ -55,7 +55,7 @@
 
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Mã hàng</label>
-                                    
+
                                     <input class="form-control" type="text" name="maMH">
                                 </div>
 
@@ -69,27 +69,20 @@
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
                                     <input class="col-md-8 form-control" id="value1" value="{{ old('value1')}}"
-                                        v-model=v1 name="soluong" placeholder="Rs." type="number" vueAttribute='v1'>
+                                        v-model=v1 name="soluong" placeholder="" type="number" vueAttribute='v1'>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 <hr>
                 <div class="form-group row" id='totals'>
-            
+
 
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-md-5">
                                 <label class="col-md-4 control-label" for="selectbasic">Đơn giá</label>
-                                {{-- <select id="byvalue" name="byvalue" class="form-control">
-                                    @foreach (\App\Subaccount::where('accountid', '=', '9')->get() as $account)
-                                    <option value="{{ $account->subid }}">
-                                        {{ $account->accountname }}
-                                    </option>
-                                    @endforeach
-                                </select> --}}
                                 <input class="form-control" type="text">
                             </div>
                             <div class="col-md-5">
@@ -101,18 +94,15 @@
                 </div>
                 <div class="form-horizontal" id='through'>
                     <div class="form-group row">
-                        <label class="col-sm-1 form-control-label">NV mua hàng</label>
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="description" value="{{ old('description')}}"
-                                maxlength=255 name="nvmh">{{ old('description')}}</textarea>
-                            {{-- <select name="nvbh" id="byvalue" class="form-control">
-                              @foreach (\App\Models\NhanVien as $nv )
+                        <label class="col-sm-2 control-label">NV mua hàng</label>
+                        <div class="col-sm-3">
+                            <select name="nhanvien" id="byvalue" class="form-control">
+                              @foreach (\App\Models\NhanVien::all() as $nv )
                               <option value=" {{ $nv->tenNV}} ">
                                 {{ $nv->tenNV }}
                               </option>
-                                
                               @endforeach
-                            </select> --}}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row" id='buttons'>

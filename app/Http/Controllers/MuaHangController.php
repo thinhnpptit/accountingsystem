@@ -47,6 +47,7 @@ class MuaHangController extends Controller
         $phieumh->so_luong = $request->soluong;
         $phieumh->thanh_tien = $request->thanhtien;
         $phieumh->ngay_mua = $request->ngaymua;
+        $phieumh->nhanvien_id = $request->nhanvien;
 
         $phieumh->save();
 
