@@ -3,7 +3,7 @@
 use App\Account;
 use App\Subaccount;
 use App\Chartaccount;
-use App\Http\Controllers\MuaHangController;
+use App\Http\Controllers\MuahangController;
 use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +44,7 @@ Route::group(
             $controller = ucfirst($resource) . 'Controller';
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
-
+        Route::resource('/muahang', 'MuahangController');
         Route::resource('invoices', 'InvoiceController');
 
         Route::resource('ledger', 'Ledger');
@@ -69,6 +69,7 @@ Route::group(
 
 Route::middleware('auth')->prefix('api/')->group(
     function () {
+
 
         Route::get(
             'chartaccounts',
@@ -117,6 +118,35 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('account_id', 'account', 'subaccounts');
             }
         )->name('subaccountsOfAccount');
+        Route::get(
+            'nhanvienTheovitri',
+            function (Request $request) {
+                $vitri_id = request('vitri_id');
+                Log::debug($vitri_id);
+                $nv = \App\Models\NhanVien::all()->groupBy('vitri_id');
+                if ($nv) {
+                    $nhanvien = $nv->get($vitri_id);
+                } else {
+                    $nhanvien = [];
+                }
+                return compact('vitri_id', 'nhanvien');
+            }
+        )->name('nhanvienTheovitri');
+
+        Route::get(
+            'vitriTheoPhongban',
+            function (Request $request) {
+                $phongban = request('phongban');
+                Log::debug($phongban);
+                $vitri = \App\Models\ViTri::all()->groupBy('phongban');
+                if ($vitri) {
+                    $chucvu = $vitri->get($phongban);
+                } else {
+                    $chucvu = [];
+                }
+                return compact('phongban', 'chucvu');
+            }
+        )->name('vitriTheoPhongban');
     }
 );
 
@@ -133,8 +163,6 @@ Route::fallback(
     }
 );
 
-
-Route::resource('/muahang', 'MuaHangController');
 
 // Verb        Path                            Action  Route Name
 // -------------------------------------------------------------------

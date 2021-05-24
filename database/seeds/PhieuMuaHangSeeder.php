@@ -3,7 +3,7 @@
 use App\Models\PhieuMuaHang;
 use Illuminate\Database\Seeder;
 
-class PhieuMuaHangTableSeeder extends Seeder
+class PhieuMuaHangSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,7 @@ class PhieuMuaHangTableSeeder extends Seeder
      */
     public function run()
     {
+        //
         factory(PhieuMuaHang::class, 20)->create();
     }
 }

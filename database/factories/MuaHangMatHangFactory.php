@@ -11,6 +11,7 @@ $factory->define(MuaHangMatHang::class, function (Faker $faker) {
     return [
         //
         'mathang_id' => MatHang::all()->random()->id,
+        'so_luong' => $faker->numberBetween($min = 1, $max = 50),
         'phieumuahang_id' => PhieuMuaHang::all()->random()->id,
     ];
 });
