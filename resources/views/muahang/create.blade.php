@@ -15,19 +15,19 @@
                 <div id="HTMLtoPDF">
                     <div class="form-group row" id='NoAndDate'>
                         <div class="col-sm-9">
+                            <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Loại phiếu</label>
                             <div class="row">
                                 <div class="col-md-5">
                                     <label class="col-md-4 control-label" for="selectbasic">Phân loại</label>
                                     <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
                                         class="form-control">
-                                        <option value="Mua hàng trong nước nhập kho">{ Mua hàng trong nước nhập kho }</option>
-                                        <option value="Mua hàng trong nước không qua kho">{ Mua hàng trong nước không qua kho }</option>
+                                        <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
+                                        <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
                                     </select>
-
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-md-4 control-label" for="selectbasic"
-                                        class="form-control">Ngày</label>
+                                    <label class="col-md-8 control-label" for="selectbasic"
+                                        class="form-control">Ngày xuất phiếu</label>
                                     <input type="date" id="datevalue" name="ngaymua" class="form-control"
                                         value="{{ old('datevalue') ?? "2021-00-00 " }}" 
                                          />
@@ -35,63 +35,86 @@
                             </div>
                         </div>
                     </div>
-                    <div class="line"> </div> </br>
+                    <div class="line"> </div>
                     <div class="form-group row" id='ChartaccountTopLine'>
                         <div class="col-sm-12">
                             <div class="row">
+                                <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Nhân viên mua hàng</label>
+                                <div class="col-md-3">
+                                    <label class="col-md-12 control-label" for="selectbasic">Phòng ban</label>
+                                    <div class="show_product"></div>
+                                    <select id="phongban" name="phongban" class="form-control"
+                                            onchange="phongbanChanged()" value="{{ old('phongban')}}">
+                                        <option value>Chọn phòng ban làm việc</option>
 
-                                <div class="col-md-3">                     
+                                        @foreach ($phongban as $pb)
+                                            <option value="{{ $pb }}">{{ $pb }}
+                                            </option>
+                                        @endforeach
 
-                                  <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
-                                  <input class="form-control" type="text" name="nhaCC">
-
-                                        {{-- NhaCC --}}
-                                        {{-- @foreach (\App\Chartaccount::all() as $chartaccount)
-                                        <option value="{{ $chartaccount->chartid }}">{{ $chartaccount->accountname }}
-                                        </option>
-                                        @endforeach --}}
-
+                                    </select>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Mã hàng</label>
-                                    
-                                    <input class="form-control" type="text" name="maMH">
+                                    <label class="col-md-8 control-label" for="selectbasic">Chức vụ</label>
+                                    <select id="chucvu" name="chucvu" class="form-control"
+                                            onchange="chucvuChanged()" value="{{ old('chucvu') }}">
+                                    </select>
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Tên hàng</label>
-                                    <input id="subvalue1" name="tenhang"
-                                        class="form-control">
-                                </div>
-
-
-                                <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
-                                    <input class="col-md-8 form-control" id="value1" value="{{ old('value1')}}"
-                                        v-model=v1 name="soluong" placeholder="Rs." type="number" vueAttribute='v1'>
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhân viên</label>
+                                    <select id="nhanvien" name="nhanvien" class="form-control" value="{{ old('nhanvien') }}">
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="line"> </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Danh sách hàng mua</label>
+                                <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Mặt hàng</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Đơn giá</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @for ($i = 1; $i <= 5; $i++) <div class="form-group row" id='line{{$i}}'>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="tenMH{{$i}}" value="{{ old('tenMH' . $i) }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="nhaCC{{$i}}" value="{{ old('nhaCC' . $i) }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="dongia{{$i}}" value="{{ old('dongia' . $i) }}">
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="col-md-8 form-control" id="soluong{{$i}}" v-model="v{{$i}}"
+                                            name="soluong{{$i}}" value="{{ old('soluong' . $i )}}" placeholder="1"
+                                           type="number" vueAttribute='v{{$i}}'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endfor
                 <hr>
                 <div class="form-group row" id='totals'>
-            
-
                     <div class="col-sm-9">
                         <div class="row">
-                            <div class="col-md-5">
-                                <label class="col-md-4 control-label" for="selectbasic">Đơn giá</label>
-                                {{-- <select id="byvalue" name="byvalue" class="form-control">
-                                    @foreach (\App\Subaccount::where('accountid', '=', '9')->get() as $account)
-                                    <option value="{{ $account->subid }}">
-                                        {{ $account->accountname }}
-                                    </option>
-                                    @endforeach
-                                </select> --}}
-                                <input class="form-control" type="text">
-                            </div>
                             <div class="col-md-5">
                               <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
                               <input class="form-control" type="text" name="thanhtien">
@@ -100,28 +123,12 @@
                     </div>
                 </div>
                 <div class="form-horizontal" id='through'>
-                    <div class="form-group row">
-                        <label class="col-sm-1 form-control-label">NV mua hàng</label>
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="description" value="{{ old('description')}}"
-                                maxlength=255 name="nvmh">{{ old('description')}}</textarea>
-                            {{-- <select name="nvbh" id="byvalue" class="form-control">
-                              @foreach (\App\Models\NhanVien as $nv )
-                              <option value=" {{ $nv->tenNV}} ">
-                                {{ $nv->tenNV }}
-                              </option>
-                                
-                              @endforeach
-                            </select> --}}
-                        </div>
-                    </div>
                     <div class="form-group row" id='buttons'>
                         <div class="col-sm-12 ml-auto">
-                            <button type="button" onclick="cancel()" class="btn btn-secondary">Cancel</button>
+                            <button type="button" onclick="cancel()" class="btn btn-secondary">Hủy</button>
                             <button type="button" onclick="showAll()" class="btn btn-primary" name="btnshow"
-                                id="btnadd">Show All</button>
-                            <button type="submit" class="btn btn-primary" name="btnadd" id="btnadd" onclick="save()">Add To
-                                Database</button>
+                                id="btnadd">Xem danh sách</button>
+                            <button type="submit" class="btn btn-primary" name="btnadd" id="btnadd" onclick="save()">Lưu phiếu</button>
                         </div>
                     </div>
                 </div>
@@ -147,39 +154,41 @@
         return target;
     }
 
-    function chartChanged(){
-        chart_id = $('#chartvalue').val();
-        params={ chart_id : chart_id };
-        axios.get("{{ route('accountsOfChart') }}" , { params: params } ).then( reply=> {
+    function phongbanChanged(){
+        phongban = $('#chucvu').val();
+        params={ phongban : phongban };
+        axios.get("{{ route('vitriTheoPhongban') }}" , { params: params } ).then( reply=> {
             data=reply.data
-            accounts=data.accounts;
-            jQuery('#mainvalue').html('');
-            jQuery('#mainvalue').html(' <option value >Select Account</option>');
-            accounts.forEach(account => {
-                $("#mainvalue").append(
-                    '<option value= "' + account.id + '" > ' + account.name + '</option>'
+            chucvu=data.chucvu;
+            jQuery('#chucvu').html('');
+            jQuery('#chucvu').html(' <option value >Chọn chức vụ</option>');
+            chucvu.forEach(chucvu => {
+                $("#chucvu").append(
+                    '<option value= "' + chucvu.id + '" > ' + chucvu.chucvu + '</option>'
                     );
             });
         });
     }
 
-    function mainAccountChanged() {
-        var account_id = $('#mainvalue').val();
-        params={ account_id : account_id };
-        axios.get("{{ route('subaccountsOfAccount') }}" , { params : params }). then (reply => {
+    function chucvuChanged() {
+        var vitri_id = $('#nhanvien').val();
+        params={ vitri_id : vitri_id };
+        axios.get("{{ route('nhanvienTheovitri') }}" , { params : params }). then (reply => {
             data=reply.data;
-            el="[id^='subvalue']"
-            $(el).html('');
-            $(el).html('<option value >Select Account</option>');
-            console.log(data)
-            data.subaccounts.forEach(subAccount => {
-                $(el).append(
-                    '<option value="' + subAccount.subid + '" >'  + subAccount.accountname + '</option>'
+            nhanvien = data.nhanvien;
+            jQuery('#nhanvien').html('');
+            jQuery('#nhanvien').html(' <option value >Chọn nhân viên</option>');
+            nhanvien.forEach(nhanvien => {
+                $("#nhanvien").append(
+                    '<option value="' + nhanvien.id + '" >'  + nhanvien.tenNV + '</option>'
                 );
             });
         });
     }
 
+    function mathang(){
+        console.log("ok");
+    }
     function cancel(){
         location.reload();
     }

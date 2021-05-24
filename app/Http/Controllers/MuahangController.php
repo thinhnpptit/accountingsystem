@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MatHang;
+use App\Models\NhanVien;
 use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 
-class MuaHangController extends Controller
+class MuahangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +19,6 @@ class MuaHangController extends Controller
         //
         $muahang = PhieuMuaHang::all();
 
-
         return view('muahang.index', compact('muahang'));
     }
 
@@ -28,8 +29,11 @@ class MuaHangController extends Controller
      */
     public function create()
     {
-        //
-        return view('muahang.create');
+        $phongban =  \App\Models\ViTri::all()->groupBy('phongban')->keys();
+        $vitri = \App\Models\ViTri::all()->groupBy('phongban');
+        $mathang = MatHang::all();
+
+        return view('muahang.create', compact('phongban', 'vitri', 'mathang'));
     }
 
     /**
@@ -40,17 +44,15 @@ class MuaHangController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $phieumh = new PhieuMuaHang;
         $phieumh->phan_loai = $request->phanloai;
-        // $phieumh->nha_cc = $request->nhacc;
-        $phieumh->so_luong = $request->soluong;
         $phieumh->thanh_tien = $request->thanhtien;
         $phieumh->ngay_mua = $request->ngaymua;
-
+        $phieumh->hoadon_id = "1";
+        $phieumh->nhanvien_id = $request->nhanvien;
         $phieumh->save();
 
-        return redirect()->route('muahang.index')->with('Add success');
+        return redirect()->route('muahangs.index')->with('Add success');
     }
 
     /**
@@ -102,7 +104,7 @@ class MuaHangController extends Controller
         $phieumh->save();
 
         $message = "Phiếu mua hàng với id = " . $phieumh->id . " được cập nhật thành công";
-        return redirect()->route('muahang.index')->with(compact($message));
+        return redirect()->route('muahangs.index')->with(compact($message));
     }
 
     /**
@@ -117,6 +119,6 @@ class MuaHangController extends Controller
         $muahang = PhieuMuaHang::find($id);
         $muahang->delete();
 
-        return redirect()->route('muahang.index')->with('Delete successfully');
+        return redirect()->route('muahangs.index')->with('Delete successfully');
     }
 }

@@ -23,13 +23,13 @@
                         <table id="tables" class="display">
                             <thead>
                                 <tr class="table-active">
-                                    <th class="table-danger">ID</th>
+                                    <th class="table-danger">Số phiếu</th>
                                     <th>Phân loại</th>
-                                    <th>Số lượng</th>
+                                    <th>Người mua</th>
                                     <th>Ngày mua</th>
                                     <th>Tổng tiền</th>
-                                    <th>Print</th>
-                                    <th>Edit/Delete</th>
+                                    <th>In phiếu</th>
+                                    <th>Sửa/Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,14 +37,13 @@
                                 <tr>
                                     <td class="table-active">{{ $p->id  }}</td>
                                     <td class="table-secondary">{{ $p->phan_loai   }}</td>
-                                    {{-- <td>{{ \App\Account::find($p->mainaccount)->name   }}</td> --}}
-                                    <td>{{ $p->so_luong   }}</td>
+                                     <td>{{ \App\Models\NhanVien::find($p->nhanvien_id)->tenNV }}</td>
                                     <td>{{ $p->ngay_mua   }}</td>
                                     <td class="table-active">{{ $p->thanh_tien   }}</td>
-                                    <td><a href="{{ route('muahang.show',$p->id)}}">Print</a> </td>
+                                    <td><a href="{{ route('muahang.show',$p->id)}}">In Phiếu</a> </td>
                                     <td>
-                                        <a href="{{ route('muahang.edit', $p->id)}}">Edit</a> |
-                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Delete</a>
+                                        <a href="{{ route('muahang.edit', $p->id)}}">Sửa</a> |
+                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Xóa</a>
                                         <div style='display=none'>
                                             <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('muahang.destroy', $p->id)}}" >
                                                 @method('DELETE')

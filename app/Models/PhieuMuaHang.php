@@ -9,8 +9,8 @@ class PhieuMuaHang extends Model
     //
     protected $fillable = [
         'phanloai',
-        'soluong',
         'thanhtien',
         'ngaymua',
+        'nhanvien_id',
     ];
 }
