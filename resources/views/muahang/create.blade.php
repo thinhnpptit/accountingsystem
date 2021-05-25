@@ -29,7 +29,7 @@
                                     <label class="col-md-8 control-label" for="selectbasic"
                                         class="form-control">Ngày xuất phiếu</label>
                                     <input type="date" id="datevalue" name="ngaymua" class="form-control"
-                                        value="{{ old('datevalue') ?? "2021-00-00 " }}" 
+                                        value="{{ old('datevalue') ?? "2021-00-00 " }}"
                                          />
                                 </div>
                             </div>
@@ -155,7 +155,7 @@
     }
 
     function phongbanChanged(){
-        phongban = $('#chucvu').val();
+        phongban = $('#phongban').val();
         params={ phongban : phongban };
         axios.get("{{ route('vitriTheoPhongban') }}" , { params: params } ).then( reply=> {
             data=reply.data
@@ -171,7 +171,7 @@
     }
 
     function chucvuChanged() {
-        var vitri_id = $('#nhanvien').val();
+        var vitri_id = $('#chucvu').val();
         params={ vitri_id : vitri_id };
         axios.get("{{ route('nhanvienTheovitri') }}" , { params : params }). then (reply => {
             data=reply.data;
