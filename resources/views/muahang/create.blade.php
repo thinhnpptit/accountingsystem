@@ -8,7 +8,7 @@
 
 <div class="col-lg-12">
     <div class="block">
-        <div class="title"><strong>Thêm phiếu mua hàng</strong></div>
+        <div class="title"><strong>Hoá Đơn Bán</strong></div>
         <div class="block-body">
             <form name="form" id="form1" action="{{ route("muahang.store")}}" method="post" class="form-horizontal">
                 @csrf
@@ -16,93 +16,99 @@
                     <div class="form-group row" id='NoAndDate'>
                         <div class="col-sm-9">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-4 control-label" for="selectbasic">Phân loại</label>
-                                    <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
+                                <div class="col-md-4">
+                                    <label class="col-md-4 control-label" for="selectbasic">ID Hoá Đơn</label>
+                                    <select id="selectbasic" name="selectbasic" value="{{ old('selectbasic') }}"
                                         class="form-control">
-                                        <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
-                                        <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
+                                        <option value="0">{ Tự Động }</option>
                                     </select>
-
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-md-4 control-label" for="selectbasic"
-                                        class="form-control">Ngày</label>
-                                    <input type="date" id="datevalue" name="ngaymua" class="form-control"
-                                        value="{{ old('datevalue') ?? "2021-00-00 " }}"
-                                         />
+                                        class="form-control">Ngày Tạo</label>
+                                    <input required  type="date" id="datevalue" name="ngaymua" class="form-control"
+                                        value="{{ old('datevalue') ?? "2018-00-00 " }}"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="line"> </div> </br>
+                    <!-- <div class="line"> </div> </br> -->
                     <div class="form-group row" id='ChartaccountTopLine'>
                         <div class="col-sm-12">
                             <div class="row">
-
                                 <div class="col-md-3">
-
-                                  <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
-                                  <input class="form-control" type="text" name="nhaCC">
-
-                                        {{-- NhaCC --}}
-                                        {{-- @foreach (\App\Chartaccount::all() as $chartaccount)
-                                        <option value="{{ $chartaccount->chartid }}">{{ $chartaccount->accountname }}
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhân Viên</label>
+                                    <select name="nhanvien" id="byvalue" class="form-control">
+                                        @foreach (\App\Models\NhanVien::all() as $nv )
+                                        <option value=" {{ $nv->id}} ">
+                                        {{ $nv->tenNV }}
                                         </option>
-                                        @endforeach --}}
-
+                                        @endforeach
+                                    </select>
                                 </div>
-
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Mã hàng</label>
-
-                                    <input class="form-control" type="text" name="maMH">
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Tên hàng</label>
-                                    <input id="subvalue1" name="tenhang"
+                                    <label class="col-md-8 control-label" for="selectbasic">Phân Loại</label>
+                                    <select id="subvalue1" name="phanloai" value="{{ old('subvalue1')}}"
                                         class="form-control">
+                                        <option value=" Mua hàng trong nước nhập kho ">
+                                            Mua hàng trong nước nhập kho
+                                            </option>
+                                        <option value=" Mua hàng nhập khẩu nhập kho ">
+                                            Mua hang nhập khẩu nhập kho
+                                        </option>
+                                    </select>
                                 </div>
 
+                                <div class="col-md-3" id="PBH">
+                                    <label class="col-md-8 control-label" for="selectbasic">Khách Hàng</label>
+                                    <input required  class="col-md-8 form-control"
+                                        name="value1" placeholder="{ Phiếu Bán Hàng }" >
+                                </div>
 
+                                <div class="col-md-3" id="PMH">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button col-md-8">Add</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line input_fields_wrap"> </div>
+                        <div class="col-sm-12">
+                            <div class="row">
                                 <div class="col-md-3">
-                                    <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
-                                    <input class="col-md-8 form-control" id="value1" value="{{ old('value1')}}"
-                                        v-model=v1 name="soluong" placeholder="" type="number" vueAttribute='v1'>
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label>
+                                    <input required  class="form-control"
+                                        name="nhacc" placeholder="{ Nha cung cap }" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label>
+                                    <input required  class="form-control"
+                                        name="tenMH" placeholder="{ Mat hang }" >
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label>
+                                    <input required  class=" form-control" id="value{{$i ?? ''}}"
+                                        name="soluong"  placeholder="0"
+                                        type="number" >
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label>
+                                    <input required  class=" form-control" id="value{{$i ?? ''}}"
+                                        name="dongia"  placeholder="0"
+                                        type="number" >
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                <hr>
-                <div class="form-group row" id='totals'>
-
-
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <label class="col-md-4 control-label" for="selectbasic">Đơn giá</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="col-md-5">
-                              <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
-                              <input class="form-control" type="text" name="thanhtien">
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <hr>
+
                 <div class="form-horizontal" id='through'>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label">NV mua hàng</label>
-                        <div class="col-sm-3">
-                            <select name="nhanvien" id="byvalue" class="form-control">
-                              @foreach (\App\Models\NhanVien::all() as $nv )
-                              <option value=" {{ $nv->tenNV}} ">
-                                {{ $nv->tenNV }}
-                              </option>
-                              @endforeach
-                            </select>
+                        <div class="col-md-3">
+                            <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
+                            <input required  class="form-control" type="text" name="thanhtien">
                         </div>
                     </div>
                     <div class="form-group row" id='buttons'>
@@ -131,6 +137,26 @@
 <script src="/core/js/pdfFromHTML.js"></script>
 
 <script>
+
+$(document).ready(function() {
+	var max_fields      = 10; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div></div><div class="line input_fields_wrap"> </div> </br> <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label> <input required  class="form-control"   name="nhacc" placeholder="{ Nha cung cap }" > </div> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label> <input required  class="form-control"   name="tenMH" placeholder="{ Mat hang }" > </div> <!-- <div class="col-md-3"> <select id="subvalue{{$i ?? ''}}" name="subvalue{{$i ?? ''}}"  class="form-control"> </select> </div> --> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label> <input required  class=" form-control" id="value{{$i ?? ''}}" v-model=v{{$i ?? ''}} name="soluong"  placeholder="0" type="number" > </div> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label> <input required  class=" form-control" id="value{{$i ?? ''}}" v-model=v{{$i ?? ''}} name="dongia"  placeholder="0" type="number" > </div> </div> </div> </div></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+});
+
     function target(e){
         e = e || window.event;
         var target = e.target || e.srcElement;

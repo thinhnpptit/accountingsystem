@@ -44,10 +44,13 @@ class MuaHangController extends Controller
         $phieumh = new PhieuMuaHang;
         $phieumh->phan_loai = $request->phanloai;
         // $phieumh->nha_cc = $request->nhacc;
+        // $phieumh->tenMH = $request->tenMH;
+        // $phieumh->dongia = $request->dongia;
         $phieumh->so_luong = $request->soluong;
         $phieumh->thanh_tien = $request->thanhtien;
         $phieumh->ngay_mua = $request->ngaymua;
         $phieumh->nhanvien_id = $request->nhanvien;
+        // $phieumh->thanhtien =
 
         $phieumh->save();
 

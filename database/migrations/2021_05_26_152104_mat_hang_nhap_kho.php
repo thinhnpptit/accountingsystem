@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMatHangsTable extends Migration
+class MatHangNhapKho extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMatHangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mat_hangs', function (Blueprint $table) {
+        //
+        Schema::create('mat_hang_nhap_kho', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tenMH');
-            $table->float('don_gia');
-            $table->string('nhaCC')->nullable(true);
-            $table->timestamps();
+            $table->bigInteger('nhap_kho_id');
+            $table->bigInteger('mat_hang_id');
         });
     }
 
@@ -29,6 +28,7 @@ class CreateMatHangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mat_hangs');
+        //
+        Schema::dropIfExists('mat_hang_nhap_kho');
     }
 }

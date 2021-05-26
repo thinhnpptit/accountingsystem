@@ -12,7 +12,7 @@
 
 
         <meta charset="utf-8">
-        
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,6 +58,11 @@
             [v-cloak] {
                 display: none;
             }
+
+            #PMH, #PBH{
+                display: none;
+            }
+
         </style>
 
         @yield('header')
@@ -81,11 +86,11 @@
                 <nav class="navbar navbar-expand-lg">
                     <div class="search-panel">
                         <div class="search-inner d-flex align-items-center justify-content-center">
-                            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+                            <div class="close-btn">Đóng <i class="fa fa-close"></i></div>
                             <form id="searchForm" action="#">
                                 <div class="form-group">
-                                    <input type="search" name="search" placeholder="What are you searching for...">
-                                    <button type="submit" class="submit">Search</button>
+                                    <input type="search" name="search" placeholder="Nhập thông tin ...">
+                                    <button type="submit" class="submit">Tìm kiếm</button>
                                 </div>
                             </form>
                         </div>
@@ -94,9 +99,9 @@
                         <div class="navbar-header">
                             <!-- Navbar Header--><a href="/" class="navbar-brand">
                                 <div class="brand-text brand-big visible text-uppercase"><strong
-                                        class="text-primary">Dash</strong><strong>Board</strong></div>
+                                        class="text-primary">THU</strong> <strong>GỌN</strong></div>
                                 <div class="brand-text brand-sm"><strong
-                                        class="text-primary">S</strong><strong>S</strong></div>
+                                        class="text-primary">MỞ</strong> <strong>RỘNG</strong></div>
                             </a>
                             <!-- Sidebar Toggle Btn-->
                             <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
@@ -107,7 +112,7 @@
 
                             <a id="logout" href="{{ route('logout') }}" class="nav-link"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <span style='color:blue'> {{ Auth::user()->name }} </span> Logout <i
+                                <span style='color:blue'> {{ Auth::user()->name }} </span> | Đăng xuất <i
                                     class="icon-logout"></i>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -127,26 +132,34 @@
                         <div class="avatar"><img src="/core/img/Mylogo.jpg" alt="..." class="img-fluid rounded-circle">
                         </div>
                         <div class="title">
-                            <h1 class="h5">SSA</h1>
-                            <p>(Super-Sami.com)</p>
+                            <h1 class="h5">Trang Chủ</h1>
+                            <p>HTQLKT</p>
                         </div>
                     </div>
 
-                    <span class="heading">Nghiệp vụ</span>
+                    <span class="heading">Danh Mục</span>
                     <ul class="list-unstyled">
                         <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
+                                    class="fa fa-file-text-o"></i>Phiếu Mua Hàng</a></li>
                         <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Receipt Voucher </a></li>
-                        <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
-                                    class="icon-padnote"></i>Invoice </a></li>
-                        <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
-                                    class="icon-padnote"></i>Supplier Invoice </a></li>
-                                    
+                                    class="fa fa-file-text-o"></i>Phiếu Thu Chi</a></li>
+                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
+                                    class="icon-padnote"></i>Phiếu Nhập Kho</a></li>
+                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
+                                    class="icon-padnote"></i>Phiếu Xuất Kho</a></li>
                         <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
-                                    class="icon-padnote"></i>Adjustment
-                            </a></li>
-                        <li {{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create'] )}}>
+                                    class="icon-padnote"></i>Bảng Chấm Công</a></li>
+                        <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
+                            <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
+                                    class="icon-windows"></i>Quản Lý Lương</a>
+                            <ul id="Accounts" class="collapse list-unstyled ">
+                                <li {{ activeIfRoute('chartaccounts.create') }}><a
+                                        href="{{ route('chartaccounts.create') }}">Bảng Chấm Công</a></li>
+                                <li {{ activeIfRoute('accounts.create') }}><a
+                                        href="{{ route('accounts.create') }}">Bảng Lương</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li {{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create'] )}}>
                             <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>Create Account</a>
                             <ul id="Accounts" class="collapse list-unstyled ">
@@ -159,7 +172,7 @@
                             </ul>
                         </li>
                         <li
-                            {{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] )}}>
+                            {{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','nhapkho.index'] )}}>
                             <a href="ul#Records" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>All Records</a>
                             <ul id="Records" class="collapse list-unstyled ">
@@ -171,14 +184,14 @@
                                         href="{{ route('receipts.index') }}">Receipt
                                         Voucher
                                         Records</a></li>
-                                <li {{ activeIfRoute('invoices.index') }}><a
-                                        href="{{ route('invoices.index') }}">Invoice
+                                <li {{ activeIfRoute('nhapkho.index') }}><a
+                                        href="{{ route('nhapkho.index') }}">Invoice
                                         Records</a></li>
                                 <li {{ activeIfRoute('adjustments.index')    }}><a
                                         href="{{ route('adjustments.index') }}">Adjustment
                                         Records</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
                 <!-- Sidebar Navigation end-->
@@ -189,7 +202,7 @@
                     <!-- Page Header-->
                     <div class="page-header no-margin-bottom">
                         <div class="container-fluid">
-                            <h2 class="h5 no-margin-bottom">Accounting Managements</h2>
+                            <h2 class="h5 no-margin-bottom">HỆ THỐNG QUẢN LÝ KẾ TOÁN</h2>
                         </div>
                     </div>
                     <!-- Breadcrumb-->
@@ -246,7 +259,7 @@
                         <div class="footer__block block no-margin-bottom">
                             <div class="container-fluid text-center">
                                 <!-- Please do not remove the backlink to us unless you support us at https://super-sami.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                                <p class="no-margin-bottom">2021&copy;Design by group 1.2</p>
+                                <p class="no-margin-bottom">Hệ Thống Quản Lý Kế Toán - Nhóm 1.2</a>.</p>
                             </div>
                         </div>
                     </footer>
@@ -279,7 +292,7 @@
         if ('{{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create']) }}') {
             setTimeout(function() { $('ul#Accounts').addClass('show'); } ,200);
         }
-        if ('{{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','invoices.index'] ) }}') {
+        if ('{{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','nhapkho.index'] ) }}') {
             setTimeout(function() { $('ul#Records').addClass('show') } ,200);
         }
 

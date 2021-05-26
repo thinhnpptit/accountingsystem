@@ -45,10 +45,10 @@ Route::group(
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
 
-        Route::resource('invoices', 'InvoiceController');
+        // Route::resource('invoices', 'InvoiceController');
 
-        Route::resource('ledger', 'Ledger');
-        Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
+        // Route::resource('ledger', 'Ledger');
+        // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
 
 
 
@@ -135,6 +135,7 @@ Route::fallback(
 
 
 Route::resource('/muahang', 'MuaHangController');
+Route::resource('/nhapkho', 'NhapKhoController');
 
 // Verb        Path                            Action  Route Name
 // -------------------------------------------------------------------

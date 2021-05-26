@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\MuaHangMatHang;
+use App\Models\PhieuNhapKho;
 use Illuminate\Database\Seeder;
 
-class MuaHangMatHangTableSeeder extends Seeder
+class PhieuNhapKhoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class MuaHangMatHangTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(MuaHangMatHang::class, 20)->create();
+        factory(PhieuNhapKho::class, 20)->create();
     }
 }

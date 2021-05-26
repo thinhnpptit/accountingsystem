@@ -92,7 +92,7 @@
                                 <div class="col-md-3">
                                     <select name="nhanvien" id="byvalue" class="form-control">
                                         @foreach (\App\Models\NhanVien::all() as $nv )
-                                        <option value=" {{ $nv->tenNV}} ">
+                                        <option value=" {{ $nv->id}} ">
                                           {{ $nv->tenNV }}
                                         </option>
                                         @endforeach

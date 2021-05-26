@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Arr;
 
 $factory->define(PhieuMuaHang::class, function (Faker $faker) {
-    $array = ['Mua hàng trong nước nhập kho', 'Mua hàng trong nước không qua kho'];
+    $array = ['Mua hàng trong nước nhập kho', 'Mua hàng nhập khẩu nhập kho'];
     return [
         //
         'phan_loai' => Arr::random($array),
