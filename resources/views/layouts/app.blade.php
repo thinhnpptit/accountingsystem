@@ -12,7 +12,7 @@
 
 
         <meta charset="utf-8">
-        
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -136,13 +136,15 @@
                     <ul class="list-unstyled">
                         <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
                                     class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
+                        <li {{ activeIfRoute('banhang.create') }}><a href="{{ route('banhang.create') }}"> <i
+                                    class="fa fa-file-text-o"></i>Quản lý bán hàng </a></li>
                         <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
                                     class="fa fa-file-text-o"></i>Receipt Voucher </a></li>
                         <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
                                     class="icon-padnote"></i>Invoice </a></li>
                         <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
                                     class="icon-padnote"></i>Supplier Invoice </a></li>
-                                    
+
                         <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
                                     class="icon-padnote"></i>Adjustment
                             </a></li>

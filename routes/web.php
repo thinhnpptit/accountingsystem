@@ -3,8 +3,6 @@
 use App\Account;
 use App\Subaccount;
 use App\Chartaccount;
-use App\Http\Controllers\MuahangController;
-use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,12 +37,13 @@ Route::group(
             }
         );
 
-        foreach (['muahang', 'receipt', 'adjustment'] as $resource) {
+        foreach (['muahang', 'receipt', 'adjustment', 'banhang'] as $resource) {
             $prefix = Str::plural($resource);
             $controller = ucfirst($resource) . 'Controller';
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
         Route::resource('/muahang', 'MuahangController');
+        Route::resource('/banhang', 'BanhangController');
         Route::resource('invoices', 'InvoiceController');
 
         Route::resource('ledger', 'Ledger');
@@ -70,7 +69,6 @@ Route::group(
 Route::middleware('auth')->prefix('api/')->group(
     function () {
 
-
         Route::get(
             'chartaccounts',
             function (Request $request) {
@@ -84,6 +82,14 @@ Route::middleware('auth')->prefix('api/')->group(
             function (Request $request) {
                 $accounts = Account::with('chart')->get();
                 return compact('accounts');
+            }
+        );
+
+        Route::get(
+            'mathangs',
+            function (Request $request) {
+                $mathangs = \App\Models\MatHang::all();
+                return compact('mathangs');
             }
         );
 
@@ -118,6 +124,7 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('account_id', 'account', 'subaccounts');
             }
         )->name('subaccountsOfAccount');
+
         Route::get(
             'nhanvienTheovitri',
             function (Request $request) {
@@ -147,6 +154,22 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('phongban', 'chucvu');
             }
         )->name('vitriTheoPhongban');
+
+        Route::get(
+            'mhInfo',
+            function (Request $request) {
+                $ma = request('ma');
+                Log::debug($ma);
+                $mh = \App\Models\MatHang::all()->groupBy('id');
+                if ($mh) {
+                    $mhh = $mh->get($ma);
+                } else {
+                    return 0;
+                }
+                return compact('mhh');
+            }
+        )->name('mhInfo');
+
     }
 );
 
