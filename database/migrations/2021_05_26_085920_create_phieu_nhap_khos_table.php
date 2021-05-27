@@ -19,8 +19,8 @@ class CreatePhieuNhapKhosTable extends Migration
             $table->string('nha_cc');
             $table->integer('nhanvien_id');
             $table->float('tong_tien');
-            $table->integer('so_luong');
-            $table->string('don_vi');
+            // $table->integer('so_luong');
+            // $table->string('don_vi');
             $table->timestamps();
         });
     }

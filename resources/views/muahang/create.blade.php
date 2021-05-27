@@ -54,18 +54,18 @@
                                             Mua hàng trong nước nhập kho
                                             </option>
                                         <option value=" Mua hàng nhập khẩu nhập kho ">
-                                            Mua hang nhập khẩu nhập kho
+                                            Mua hàng nhập khẩu nhập kho
                                         </option>
                                     </select>
                                 </div>
 
-                                <div class="col-md-3" id="PBH">
+                                <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Khách Hàng</label>
                                     <input required  class="col-md-8 form-control"
-                                        name="value1" placeholder="{ Phiếu Bán Hàng }" >
+                                        name="khachhang"/>
                                 </div>
 
-                                <div class="col-md-3" id="PMH">
+                                <div class="col-md-3">
                                     <label class="input_fields col-md-8">
                                     </label>
                                     <button class="add_field_button col-md-8">Add</button>
@@ -80,35 +80,35 @@
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label>
                                     <input required  class="form-control"
-                                        name="nhacc" placeholder="{ Nha cung cap }" >
+                                        name="nhacc" placeholder="{ Nha cung cap }" />
                                 </div>
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label>
-                                    <input required  class="form-control"
-                                        name="tenMH" placeholder="{ Mat hang }" >
+                                    <input class="form-control"
+                                        name="tenMH" placeholder="{ Mat hang }" required />
                                 </div>
                                 <div class="col-md-2">
                                     <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label>
-                                    <input required  class=" form-control" id="value{{$i ?? ''}}"
-                                        name="soluong"  placeholder="0"
-                                        type="number" >
+                                    <input required  class=" form-control" id="soluong"
+                                        name="soluong"  placeholder="0" onchange="changeSoluong(this)"
+                                        type="text" />
                                 </div>
                                 <div class="col-md-2">
                                     <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label>
-                                    <input required  class=" form-control" id="value{{$i ?? ''}}"
+                                    <input required  class=" form-control" id="dongia" onchange="changeDongia(this)"
                                         name="dongia"  placeholder="0"
-                                        type="number" >
+                                        type="number" />
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 <hr>
 
                 <div class="form-horizontal" id='through'>
                     <div class="form-group row">
                         <div class="col-md-3">
                             <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
-                            <input required  class="form-control" type="text" name="thanhtien">
+                            <input required  class="form-control" type="text" name="thanhtien" id="thanhtien">
                         </div>
                     </div>
                     <div class="form-group row" id='buttons'>
@@ -121,7 +121,6 @@
                         </div>
                     </div>
                 </div>
-        </div>
         </form>
     </div>
 </div>
@@ -136,9 +135,31 @@
 <script src="/core/js/jquery-2.1.3.js"></script>
 <script src="/core/js/pdfFromHTML.js"></script>
 
-<script>
+<script type="text/javascript">
+
+
+
+
+// soluong1.addEventListener('change', function() {
+//     thanhtien1.value = soluong1.value * dongia1.value;
+// });
+
+// dongia1.addEventListener('change', function() {
+//     thanhtien1.value = soluong1.value * dongia1.value;
+// });
+
+var soluong1 = document.getElementById('soluong');
+var dongia1 = document.getElementById('dongia');
+
+function changeSoluong(soluong){
+    var thanhtien1 = document.getElementById('thanhtien');
+    thanhtien1.value = soluong1.value;
+}
 
 $(document).ready(function() {
+
+
+    // add them mat hang vao form
 	var max_fields      = 10; //maximum input boxes allowed
 	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
 	var add_button      = $(".add_field_button"); //Add button ID
@@ -148,7 +169,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(x < max_fields){ //max input box allowed
 			x++; //text box increment
-			$(wrapper).append('<div></div><div class="line input_fields_wrap"> </div> </br> <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label> <input required  class="form-control"   name="nhacc" placeholder="{ Nha cung cap }" > </div> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label> <input required  class="form-control"   name="tenMH" placeholder="{ Mat hang }" > </div> <!-- <div class="col-md-3"> <select id="subvalue{{$i ?? ''}}" name="subvalue{{$i ?? ''}}"  class="form-control"> </select> </div> --> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label> <input required  class=" form-control" id="value{{$i ?? ''}}" v-model=v{{$i ?? ''}} name="soluong"  placeholder="0" type="number" > </div> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label> <input required  class=" form-control" id="value{{$i ?? ''}}" v-model=v{{$i ?? ''}} name="dongia"  placeholder="0" type="number" > </div> </div> </div> </div></div>'); //add input box
+			$(wrapper).append('<div></div><div class="line input_fields_wrap"> </div> </br> <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label> <input required  class="form-control"   name="nhacc" placeholder="{ Nha cung cap }" > </div> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label> <input required  class="form-control"   name="tenMH" placeholder="{ Mat hang }" > </div> <!-- <div class="col-md-3"> <select id="subvalue{{$i ?? ''}}" name="subvalue{{$i ?? ''}}"  class="form-control"> </select> </div> --> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label> <input required  class=" form-control" id="soluong" v-model=v{{$i ?? ''}} name="soluong[]"  placeholder="0" type="number" > </div> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label> <input required  class=" form-control" id="dongia" v-model=v{{$i ?? ''}} name="dongia[]"  placeholder="0" type="number" > </div> </div> </div> </div></div>'); //add input box
 		}
 	});
 

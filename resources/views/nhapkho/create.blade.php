@@ -58,61 +58,52 @@
                     </div>
                     <br>
                     {{-- I am not using blade for because for some reason it messes with auto-formating  --}}
-                    <?php for($i = 1; $i <= 1; $i++) { ?>
-                    <div class="form-group row" id='line{{$i}}' >
+                    <div class="form-group row input_fields_wrap" >
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-md-1">
-                                    @if ($i==1)
-                                    <label class="col-md-12 control-label" for="selectbasic">Mã Hàng</label>
-                                    @endif
-                                    <select id="selectbasic" name="selectbasic" value="{{ old('selectbasic') }}"
-                                        class="form-control">
-                                        <option value="0">{ Tự Động }</option>
-                                    </select>
-                                    {{-- <input class="form-control" name="mahang"> --}}
-                                </div>
                                 <div class="col-md-3">
-                                @if ($i==1)
+
                                     <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
-                                @endif
-                                    <input class="form-control" name="tenMH">
+                                    <input class="form-control" name="tenMH[]">
                                 </div>
                                 <div class="col-md-2">
-                                @if ($i==1)
+
                                     <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
-                                @endif
-                                    <select class="form-control" name="donvi">
+
+                                    <select class="form-control" name="donvi[]">
                                         <option value="kg">kg</option>
                                         <option value="chiếc">chiếc</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                @if ($i==1)
+
                                     <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
-                                @endif
-                                    <input class="form-control" name="soluong">
+
+                                    <input class="form-control" name="soluong[]">
                                 </div>
                                 <div class="col-md-2">
-                                @if ($i==1)
+
                                     <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
-                                @endif
-                                    <input class="form-control" name="dongia">
+
+                                    <input class="form-control" name="dongia[]">
                                 </div>
                                 <div class="col-md-2">
-                                @if ($i==1)
+
                                     <label class="col-md-12 control-label" for="selectbasic">Thành Tiền</label>
-                                @endif
+
                                     <input class="form-control">
+                                </div>
+                                <div class="col-md-1">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button col-md-8">Add</button>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    @if ($i<6)
                     <div class="line" style='margin-bottom:22px'>  </div>
-                    @endif
-                    <?php } ?>
+
                     <div class="form-group row" id='totals'>
                         <div class="col-sm-12">
                             <div class="row">
@@ -160,6 +151,26 @@
 <script src="/core/js/pdfFromHTML.js"></script>
 
 <script>
+
+$(document).ready(function() {
+	var max_fields      = 10; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div><div></div></div><div class="form-group row" style="width:100%; padding: 15px;" > <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label> <input class="form-control" name="tenMH[]"> </div> <div class="col-md-2"> <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label> <select class="form-control" name="donvi[]"> <option value="kg">kg</option> <option value="chiếc">chiếc</option> </select> </div> <div class="col-md-2"> <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label> <input class="form-control" name="soluong[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label> <input class="form-control" name="dongia[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Thành Tiền</label> <input class="form-control"> </div><div class="col-md-1"><button class="remove_field col-md-8">Remove</button></div></div> </div></div></div></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	});
+});
+
     function cancel(){
         location.reload();
     }
@@ -167,35 +178,6 @@
     function showAll(){
         location.href="{{ route("nhapkho.index") }}"
     }
-
-    function applyOldValues(old){
-        for (const field in old) {
-            if (old.hasOwnProperty(field)) {
-                const value = old[field];
-                element=$($('form#invoice input[name=' + field +']')[0] || $('form#invoice select[name=' + field +']')[0]) ;
-                if (element.attr('name') && (element.attr('type')!='hidden')) {
-                    element.val(value);
-                    if (element.attr('vueAttribute')){
-                        VueApp[element.attr('vueAttribute')]=value;
-                    } else {
-                        if (element.attr('onChange')) {
-                            eval(element.attr('onChange'));
-                        } else {
-                            element.trigger('input');
-                        }
-                    }
-                }
-                delete old[field];
-                setTimeout(function() { applyOldValues(old) },100);
-                return null
-            }
-        }
-    }
-
-    $( function () {
-        old= {!! json_encode(old()) !!}
-        applyOldValues(old);
-    })
 
 </script>
 

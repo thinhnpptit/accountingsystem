@@ -44,25 +44,39 @@ class NhapKhoController extends Controller
     {
         //
         $nhapkho = new PhieuNhapKho;
-        $mathang = new MatHang;
+        $mathangs = array();
+        $tenMHs = array();
+        $dongias = array();
+        $soluongs = array();
+        $donvis = array();
 
         $nhapkho->ngay_nhap = $request->ngaynhap;
-        // $nhapkho->nha_cc = $request->nhacc;
-        // $nhapkho->tenMH = $request->tenMH;
-        // $nhapkho->dongia = $request->dongia;
         $nhapkho->nha_cc = $request->nhacc;
         $nhapkho->nhanvien_id = $request->nhanvien;
         $nhapkho->tong_tien = $request->tongtien;
-        $nhapkho->so_luong = $request->soluong;
-        $nhapkho->don_vi = $request->donvi;
-        $mathang->tenMH = $request->tenMH;
-        $mathang->don_gia = $request->dongia;
-
+        foreach ($request->tenMH as $k3 => $v3) {
+            array_push($tenMHs, $request->tenMH[$k3]);
+        }
+        foreach ($request->dongia as $k4 => $v4) {
+            array_push($dongias, $request->dongia[$k4]);
+        }
         $nhapkho->save();
-        $mathang->save();
-
         $nhapkho1 = PhieuNhapKho::find($nhapkho->id);
-        $nhapkho1->mathang()->attach($mathang->id);
+        for ($i = 0; $i < count($tenMHs); $i++) {
+            array_push($mathangs, new MatHang(['tenMH' => $tenMHs[$i], 'don_gia' => $dongias[$i]]));
+        }
+        foreach ($request->soluong as $k1 => $v1) {
+            // $nhapkho1->mathang->pivot->so_luong = $request->soluong[$k1];
+            array_push($soluongs, $v1);
+        }
+        foreach ($request->donvi as $k2 => $v2) {
+            array_push($donvis, $v2);
+        }
+        for ($i = 0; $i < count($mathangs); $i++) {
+            $mh1 = new MatHang(['tenMH' => $mathangs[$i]->tenMH, 'don_gia' => $mathangs[$i]->don_gia]);
+            $mh1->save();
+            $nhapkho1->mathang()->attach($mh1->id, ['so_luong' => $soluongs[$i], 'don_vi' => $donvis[$i]]);
+        }
 
         return redirect()->route('nhapkho.index')->with('Add success');
     }
@@ -110,5 +124,9 @@ class NhapKhoController extends Controller
     public function destroy($id)
     {
         //
+        $nhapkho = PhieuNhapKho::find($id);
+        $nhapkho->delete();
+
+        return redirect()->route('nhapkho.index')->with('Delete successfully');
     }
 }

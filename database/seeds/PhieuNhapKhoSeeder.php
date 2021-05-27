@@ -13,6 +13,6 @@ class PhieuNhapKhoSeeder extends Seeder
     public function run()
     {
         //
-        factory(PhieuNhapKho::class, 20)->create();
+        factory(PhieuNhapKho::class, 5)->create();
     }
 }

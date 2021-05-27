@@ -2,8 +2,8 @@
 <title>Danh Sách Phiếu Nhập Kho</title>
 @section('header')
 
-<link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+<linhapkho rel="stylesheet" type="text/css" href="/core/css/datatable.css">
+<linhapkho rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 <style>
     [cloak] {
         display: none !important;
@@ -19,7 +19,7 @@
                 <br>
                 <div id="txtshow">
                     <div class="table-responsive">
-                        <table id="tables" class="display">
+                        <table id="tables" class="display" style="width:100%;">
                             <thead>
                                 <tr class="table-active">
                                     <th>In Phiếu</th>
@@ -35,35 +35,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($nhapkho ?? '' as $nk)
+                                @foreach ($nhapkho as $mh1)
+                                @foreach ($mh1->mathang as $mh )
                                 <tr>
-                                    <td><a href="{{ route('nhapkho.show',$nk->id)}}">In</a> </td>
+                                    <td><a href="{{ route('nhapkho.show',$mh1->id)}}">In</a> </td>
                                     <td>
-                                        <a href="{{ route('nhapkho.edit', $nk->id)}}">Sửa</a> |
-                                        <a href="#" onclick="$('form#nkoice_delete_{{$nk->id}}').trigger('submit')">Xoá</a>
+                                        <a href="{{ route('nhapkho.edit', $mh1->id)}}">Sửa</a> |
+                                        <a href="#" onclick="$('form#nhapkhooice_delete_{{$mh1->id}}').trigger('submit')">Xoá</a>
                                         <div style='display=none'>
-                                            <form id='nkoice_delete_{{$nk->id}}' method='POST' action="{{ route('nhapkho.destroy', $nk->id)}}" >
+                                            <form id='nhapkhooice_delete_{{$mh1->id}}' method='POST' action="{{ route('nhapkho.destroy', $mh1->id)}}" >
                                                 @method('DELETE')
                                                 @csrf
 
-                                            @if ($nk->Bill == 10)
+                                            {{-- @if ($mh1->Bill == 10) --}}
                                              <input name="cust" style="display:none" value="true" type="text"/>
-                                             @endif
+                                             {{-- @endif --}}
                                             </form>
                                         </div>
                                     </td>
-                                    <td class="table-active">{{ $nk->id  }}</td>
-                                    <td class="table-secondary">{{ $nk->ngay_nhap   }}</td>
-                                    <td> {{ $nk->nha_cc }} </td>
-                                    <td> {{ \App\Models\NhanVien::find($nk->nhanvien_id)->tenNV }} </td>
-                                    @foreach (\App\Models\PhieuNhapKho::find($nk->id)->mathang as $mh )
+                                    <td class="table-active">{{ $mh1->id  }}</td>
+                                    <td class="table-secondary">{{ $mh1->ngay_nhap   }}</td>
+                                    <td> {{ $mh1->nha_cc }} </td>
+                                    <td> {{ \App\Models\NhanVien::find($mh1->nhanvien_id)->tenNV }} </td>
 
+                                    {{-- @foreach (\App\Models\PhieuNhapKho::find($mh1->id)->mathang as $mh ) --}}
                                     <td> {{ \App\Models\MatHang::find($mh->pivot->mat_hang_id)->tenMH }} </td>
-                                    @endforeach
-                                    <td> {{ $nk->so_luong }} </td>
-                                    <td> {{ $nk->don_vi }} </td>
-                                    <td class="table-active"> {{ $nk->tong_tien }} </td>
+                                    <td> {{ $mh->pivot->so_luong }} </td>
+                                    <td> {{ $mh->pivot->don_vi }} </td>
+                                    {{-- @endforeach --}}
+                                    <td class="table-active"> {{ $mh1->tong_tien }} </td>
                                 </tr>
+                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>
