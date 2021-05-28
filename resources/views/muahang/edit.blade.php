@@ -21,7 +21,7 @@
 @section('content')
 <div class="col-lg-12">
     <div class="block">
-    
+
         <div class="title"><strong>Sửa Phiếu mua hàng</strong></div>
         <div class="block-body">
           <form name="form" id="muahang" action="{{ route("muahang.update", $muahang->id)}}" method="post" class="form-horizontal">
@@ -42,8 +42,8 @@
                                         class="form-control">Phân loại</label>
                                         <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
                                             class="form-control">
-                                            <option value="Mua hàng trong nước nhập kho">{ Mua hàng trong nước nhập kho }</option>
-                                            <option value="Mua hàng trong nước không qua kho">{ Mua hàng trong nước không qua kho }</option>
+                                            <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
+                                            <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
                                         </select>
                                 </div>
                             </div>
@@ -66,12 +66,12 @@
                                 </div>
                                 {{-- <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">SubAccount</label>
-                                
+
                                 </div> --}}
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group row">
                         <div class="col-md-12">
                             <div class="row">
@@ -79,10 +79,24 @@
                                     <label class="col-md-8 control-label" for="selectbasic">Tổng tiền</label>
                                 </div>
                                 <div class="col-md-3">
+                                    <label class="col-md-8 control-label" for="selectbasic">Nhân viên mua hàng</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
                                     {{-- <label class="col-md-8 control-label" for="selectbasic">{{ $muahang->thanh_tien }}
                                     </label> --}}
                                     <input class="form-control" type="text" name="thanhtien" class="form-control"
                                       value=" {{ $muahang->thanh_tien }} " >
+                                </div>
+                                <div class="col-md-3">
+                                    <select name="nhanvien" id="byvalue" class="form-control">
+                                        @foreach (\App\Models\NhanVien::all() as $nv )
+                                        <option value=" {{ $nv->id}} ">
+                                          {{ $nv->tenNV }}
+                                        </option>
+                                        @endforeach
+                                      </select>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +126,7 @@
     $( function(){
         $('form#showform input', ).prop('readonly',true);
         $('form#showform textarea', ).prop('readonly',true);
-    
+
 
     });
 
@@ -127,7 +141,7 @@
    newWin.print();
      newWin.close();
   }, 500);
- 
+
 }
 </script>
 @endsection

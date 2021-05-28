@@ -8,7 +8,7 @@
 
 <div class="col-lg-12">
     <div class="block">
-        <div class="title"><strong>Thêm phiếu mua hàng</strong></div>
+        <div class="title"><strong>Hoá Đơn Bán</strong></div>
         <div class="block-body">
             <form name="form" id="form1" action="{{ route("muahang.store")}}" method="post" class="form-horizontal">
                 @csrf
@@ -17,9 +17,9 @@
                         <div class="col-sm-9">
                             <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Loại phiếu</label>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-4 control-label" for="selectbasic">Phân loại</label>
-                                    <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
+                                <div class="col-md-4">
+                                    <label class="col-md-4 control-label" for="selectbasic">ID Hoá Đơn</label>
+                                    <select id="selectbasic" name="selectbasic" value="{{ old('selectbasic') }}"
                                         class="form-control">
                                         <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
                                         <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
@@ -54,7 +54,6 @@
 
                                     </select>
                                 </div>
-
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Chức vụ</label>
                                     <select id="chucvu" name="chucvu" class="form-control"
@@ -87,6 +86,7 @@
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <hr>
+
                 <div class="form-horizontal" id='through'>
                     <div class="form-group row" id='buttons'>
                         <div class="col-sm-12 ml-auto">
@@ -132,7 +133,6 @@
                         </div>
                     </div>
                 </div>
-        </div>
         </form>
     </div>
 </div>
@@ -147,7 +147,49 @@
 <script src="/core/js/jquery-2.1.3.js"></script>
 <script src="/core/js/pdfFromHTML.js"></script>
 
-<script>
+<script type="text/javascript">
+
+
+
+
+// soluong1.addEventListener('change', function() {
+//     thanhtien1.value = soluong1.value * dongia1.value;
+// });
+
+// dongia1.addEventListener('change', function() {
+//     thanhtien1.value = soluong1.value * dongia1.value;
+// });
+
+var soluong1 = document.getElementById('soluong');
+var dongia1 = document.getElementById('dongia');
+
+function changeSoluong(soluong){
+    var thanhtien1 = document.getElementById('thanhtien');
+    thanhtien1.value = soluong1.value;
+}
+
+$(document).ready(function() {
+
+
+    // add them mat hang vao form
+	var max_fields      = 10; //maximum input boxes allowed
+	var wrapper   		= $(".input_fields_wrap"); //Fields wrapper
+	var add_button      = $(".add_field_button"); //Add button ID
+
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div></div><div class="line input_fields_wrap"> </div> </br> <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Nhà Cung Cấp</label> <input required  class="form-control"   name="nhacc" placeholder="{ Nha cung cap }" > </div> <div class="col-md-3"> <label class="col-md-8 control-label" for="selectbasic">Mặt Hàng</label> <input required  class="form-control"   name="tenMH" placeholder="{ Mat hang }" > </div> <!-- <div class="col-md-3"> <select id="subvalue{{$i ?? ''}}" name="subvalue{{$i ?? ''}}"  class="form-control"> </select> </div> --> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label> <input required  class=" form-control" id="soluong" v-model=v{{$i ?? ''}} name="soluong[]"  placeholder="0" type="number" > </div> <div class="col-md-2"> <label class="col-md-8 control-label" for="selectbasic">Đơn Giá</label> <input required  class=" form-control" id="dongia" v-model=v{{$i ?? ''}} name="dongia[]"  placeholder="0" type="number" > </div> </div> </div> </div></div>'); //add input box
+		}
+	});
+
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').remove(); x--;
+	})
+});
+
     function target(e){
         e = e || window.event;
         var target = e.target || e.srcElement;

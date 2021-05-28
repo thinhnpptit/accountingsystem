@@ -12,9 +12,10 @@ class NhanVien extends Model
         'taikhoan_id',
         'vitri_id',
         'email',
-        ];
+    ];
 
-    public function vitri() {
+    public function vitri()
+    {
         return $this->belongsTo(ViTri::class);
     }
 }

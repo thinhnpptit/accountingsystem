@@ -48,10 +48,6 @@
                                             <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('muahang.destroy', $p->id)}}" >
                                                 @method('DELETE')
                                                 @csrf
-                                                
-                                            {{-- @if ($p->Bill == 10)
-                                             <input name="cust" style="display:none" value="true" type="text"/>
-                                             @endif --}}
                                             </form>
                                         </div>
                                     </td>

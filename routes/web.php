@@ -45,9 +45,11 @@ Route::group(
         Route::resource('/muahang', 'MuahangController');
         Route::resource('/banhang', 'BanhangController');
         Route::resource('invoices', 'InvoiceController');
+        Route::resource('/nhapkho', 'NhapKhoController');
 
-        Route::resource('ledger', 'Ledger');
-        Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
+
+        // Route::resource('ledger', 'Ledger');
+        // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
 
 
 
@@ -169,7 +171,6 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('mhh');
             }
         )->name('mhInfo');
-
     }
 );
 

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $guarded = ['id'];
-    protected $dates = [ 'date'];
+    protected $dates = ['date'];
 }
