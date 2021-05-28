@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Danh sách phiếu mua hàng</title>
+<title>Danh Sách Hoá Đơn Bán</title>
 @section('header')
 
 <link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
@@ -14,7 +14,7 @@
 @section('content')
 <div class="col-lg-12" cloak>
     <div class="block">
-        <div class="title"><strong>Danh sách phiếu mua hàng</strong></div>
+        <div class="title"><strong>Danh Sách Hoá Đơn Bán</strong></div>
         <div class="block-body">
             <form name="form" id="form1" action="" method="post">
                 <br>
@@ -23,45 +23,23 @@
                         <table id="tables" class="display">
                             <thead>
                                 <tr class="table-active">
-                                    <th class="table-danger">Số phiếu</th>
-                                    <th>Phân loại</th>
-                                    <th>Người mua</th>
-                                    <th>Ngày mua</th>
-                                    <th>Tổng tiền</th>
-<<<<<<< HEAD
-                                    <th>Nhân viên</th>
-                                    <th>Print</th>
-                                    <th>Edit/Delete</th>
-=======
-                                    <th>In phiếu</th>
-                                    <th>Sửa/Xóa</th>
->>>>>>> upstream/main
+                                    <th class="table-danger">ID Hoá Đơn</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Nhân Viên</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Khách hàng</th>
+                                    <th>In Hoá Đơn</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($muahang as $p)
+                                @foreach ($banhangs as $p)
                                 <tr>
                                     <td class="table-active">{{ $p->id  }}</td>
-                                    <td class="table-secondary">{{ $p->phan_loai   }}</td>
-                                     <td>{{ \App\Models\NhanVien::find($p->nhanvien_id)->tenNV }}</td>
-                                    <td>{{ $p->ngay_mua   }}</td>
-                                    <td class="table-active">{{ $p->thanh_tien   }}</td>
-<<<<<<< HEAD
-                                    <td> {{ $p->nhanvien->tenNV }} </td>
-                                    <td><a href="{{ route('muahang.show',$p->id)}}">Print</a> </td>
-=======
-                                    <td><a href="{{ route('muahang.show',$p->id)}}">In Phiếu</a> </td>
->>>>>>> upstream/main
-                                    <td>
-                                        <a href="{{ route('muahang.edit', $p->id)}}">Sửa</a> |
-                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Xóa</a>
-                                        <div style='display=none'>
-                                            <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('muahang.destroy', $p->id)}}" >
-                                                @method('DELETE')
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </td>
+                                    <td class="table-secondary">{{ $p->ngay_mua }}</td>
+                                    <td>{{ App\Models\NhanVien::find($p->nhanvien_id)->tenNV  }}</td>
+                                    <td>{{ $p->thanhtien   }}</td>
+                                    <td>{{ $p->khachhang }}</td>
+                                    <td><a href="{{ route('banhang.show',$p->id)}}">In</a> </td>
                                 </tr>
                                 @endforeach
                             </tbody>

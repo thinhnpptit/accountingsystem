@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MatHang;
+use App\Models\NhanVien;
 use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 
-class MuaHangController extends Controller
+class MuahangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +19,6 @@ class MuaHangController extends Controller
         //
         $muahang = PhieuMuaHang::all();
 
-
         return view('muahang.index', compact('muahang'));
     }
 
@@ -28,8 +29,11 @@ class MuaHangController extends Controller
      */
     public function create()
     {
-        //
-        return view('muahang.create');
+        $phongban =  \App\Models\ViTri::all()->groupBy('phongban')->keys();
+        $vitri = \App\Models\ViTri::all()->groupBy('phongban');
+        $mathang = MatHang::all();
+
+        return view('muahang.create', compact('phongban', 'vitri', 'mathang'));
     }
 
     /**
@@ -40,9 +44,29 @@ class MuaHangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bangMH = array();
+        for ($i=1; $i<6; $i++)
+        {
+            $ten = 'tenMH'.$i;
+            $cc = 'nhaCC'.$i;
+            $gia = 'dongia'.$i;
+            $so = 'soluong'.$i;
+            if (isset($request->$ten ))
+            {
+                $MH = array();
+                for ($j=1; $j<5; $j++)
+                {
+                    $MH = array('tenMH'.':'.$request->$ten,
+                        'nhaCC'.':'.$request->$cc,
+                        'dongia'.':'.$request->$gia,
+                        'soluong'.':'.$request->$so);
+                }
+                $bangMH[$i] = implode(',',$MH);
+            }
+        }
         $phieumh = new PhieuMuaHang;
         $phieumh->phan_loai = $request->phanloai;
+<<<<<<< HEAD:app/Http/Controllers/MuaHangController.php
         $phieumh->nha_cc = $request->nhacc;
         $phieumh->tenMH = $request->tenMH;
         $phieumh->don_gia = $request->dongia;
@@ -51,9 +75,16 @@ class MuaHangController extends Controller
         $phieumh->nhanvien_id = $request->nhanvien;
         $phieumh->thanh_tien = $request->thanhtien;
 
+=======
+        $phieumh->thanh_tien = $request->thanhtien;
+        $phieumh->ngay_mua = $request->ngaymua;
+        $phieumh->hoadon_id = "0";
+        $phieumh->nhanvien_id = $request->nhanvien;
+        $phieumh->bang_mathang = implode(';',$bangMH);
+>>>>>>> upstream/main:app/Http/Controllers/MuahangController.php
         $phieumh->save();
 
-        return redirect()->route('muahang.index')->with('Add success');
+        return redirect()->route('muahangs.index')->with('Add success');
     }
 
     /**
@@ -105,7 +136,7 @@ class MuaHangController extends Controller
         $phieumh->save();
 
         $message = "Phiếu mua hàng với id = " . $phieumh->id . " được cập nhật thành công";
-        return redirect()->route('muahang.index')->with(compact($message));
+        return redirect()->route('muahangs.index')->with(compact($message));
     }
 
     /**
@@ -120,6 +151,6 @@ class MuaHangController extends Controller
         $muahang = PhieuMuaHang::find($id);
         $muahang->delete();
 
-        return redirect()->route('muahang.index')->with('Delete successfully');
+        return redirect()->route('muahangs.index')->with('Delete successfully');
     }
 }

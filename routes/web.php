@@ -3,8 +3,6 @@
 use App\Account;
 use App\Subaccount;
 use App\Chartaccount;
-use App\Http\Controllers\MuaHangController;
-use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,13 +37,19 @@ Route::group(
             }
         );
 
-        foreach (['muahang', 'receipt', 'adjustment'] as $resource) {
+        foreach (['muahang', 'receipt', 'adjustment', 'banhang'] as $resource) {
             $prefix = Str::plural($resource);
             $controller = ucfirst($resource) . 'Controller';
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
+<<<<<<< HEAD
 
         // Route::resource('invoices', 'InvoiceController');
+=======
+        Route::resource('/muahang', 'MuahangController');
+        Route::resource('/banhang', 'BanhangController');
+        Route::resource('invoices', 'InvoiceController');
+>>>>>>> upstream/main
 
         // Route::resource('ledger', 'Ledger');
         // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
@@ -87,6 +91,14 @@ Route::middleware('auth')->prefix('api/')->group(
         );
 
         Route::get(
+            'mathangs',
+            function (Request $request) {
+                $mathangs = \App\Models\MatHang::all();
+                return compact('mathangs');
+            }
+        );
+
+        Route::get(
             'subaccounts',
             function (Request $request) {
                 $subaccounts = Subaccount::with('mainaccount')->get();
@@ -117,6 +129,52 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('account_id', 'account', 'subaccounts');
             }
         )->name('subaccountsOfAccount');
+
+        Route::get(
+            'nhanvienTheovitri',
+            function (Request $request) {
+                $vitri_id = request('vitri_id');
+                Log::debug($vitri_id);
+                $nv = \App\Models\NhanVien::all()->groupBy('vitri_id');
+                if ($nv) {
+                    $nhanvien = $nv->get($vitri_id);
+                } else {
+                    $nhanvien = [];
+                }
+                return compact('vitri_id', 'nhanvien');
+            }
+        )->name('nhanvienTheovitri');
+
+        Route::get(
+            'vitriTheoPhongban',
+            function (Request $request) {
+                $phongban = request('phongban');
+                Log::debug($phongban);
+                $vitri = \App\Models\ViTri::all()->groupBy('phongban');
+                if ($vitri) {
+                    $chucvu = $vitri->get($phongban);
+                } else {
+                    $chucvu = [];
+                }
+                return compact('phongban', 'chucvu');
+            }
+        )->name('vitriTheoPhongban');
+
+        Route::get(
+            'mhInfo',
+            function (Request $request) {
+                $ma = request('ma');
+                Log::debug($ma);
+                $mh = \App\Models\MatHang::all()->groupBy('id');
+                if ($mh) {
+                    $mhh = $mh->get($ma);
+                } else {
+                    return 0;
+                }
+                return compact('mhh');
+            }
+        )->name('mhInfo');
+
     }
 );
 
@@ -134,9 +192,12 @@ Route::fallback(
 );
 
 
+<<<<<<< HEAD
 Route::resource('/muahang', 'MuaHangController');
 Route::resource('/nhapkho', 'NhapKhoController');
 
+=======
+>>>>>>> upstream/main
 // Verb        Path                            Action  Route Name
 // -------------------------------------------------------------------
 // GET         /resource                       index   resource.index
