@@ -45,43 +45,31 @@ class MuahangController extends Controller
     public function store(Request $request)
     {
         $bangMH = array();
-        for ($i=1; $i<6; $i++)
-        {
-            $ten = 'tenMH'.$i;
-            $cc = 'nhaCC'.$i;
-            $gia = 'dongia'.$i;
-            $so = 'soluong'.$i;
-            if (isset($request->$ten ))
-            {
+        for ($i = 1; $i < 6; $i++) {
+            $ten = 'tenMH' . $i;
+            $cc = 'nhaCC' . $i;
+            $gia = 'dongia' . $i;
+            $so = 'soluong' . $i;
+            if (isset($request->$ten)) {
                 $MH = array();
-                for ($j=1; $j<5; $j++)
-                {
-                    $MH = array('tenMH'.':'.$request->$ten,
-                        'nhaCC'.':'.$request->$cc,
-                        'dongia'.':'.$request->$gia,
-                        'soluong'.':'.$request->$so);
+                for ($j = 1; $j < 5; $j++) {
+                    $MH = array(
+                        'tenMH' . ':' . $request->$ten,
+                        'nhaCC' . ':' . $request->$cc,
+                        'dongia' . ':' . $request->$gia,
+                        'soluong' . ':' . $request->$so
+                    );
                 }
-                $bangMH[$i] = implode(',',$MH);
+                $bangMH[$i] = implode(',', $MH);
             }
         }
         $phieumh = new PhieuMuaHang;
         $phieumh->phan_loai = $request->phanloai;
-<<<<<<< HEAD:app/Http/Controllers/MuaHangController.php
-        $phieumh->nha_cc = $request->nhacc;
-        $phieumh->tenMH = $request->tenMH;
-        $phieumh->don_gia = $request->dongia;
-        $phieumh->so_luong = $request->soluong;
-        $phieumh->ngay_mua = $request->ngaymua;
-        $phieumh->nhanvien_id = $request->nhanvien;
-        $phieumh->thanh_tien = $request->thanhtien;
-
-=======
         $phieumh->thanh_tien = $request->thanhtien;
         $phieumh->ngay_mua = $request->ngaymua;
         $phieumh->hoadon_id = "0";
         $phieumh->nhanvien_id = $request->nhanvien;
-        $phieumh->bang_mathang = implode(';',$bangMH);
->>>>>>> upstream/main:app/Http/Controllers/MuahangController.php
+        $phieumh->bang_mathang = implode(';', $bangMH);
         $phieumh->save();
 
         return redirect()->route('muahangs.index')->with('Add success');

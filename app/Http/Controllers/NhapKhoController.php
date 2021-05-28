@@ -60,22 +60,22 @@ class NhapKhoController extends Controller
         foreach ($request->dongia as $k4 => $v4) {
             array_push($dongias, $request->dongia[$k4]);
         }
+        foreach ($request->donvi as $k2 => $v2) {
+            array_push($donvis, $v2);
+        }
         $nhapkho->save();
         $nhapkho1 = PhieuNhapKho::find($nhapkho->id);
         for ($i = 0; $i < count($tenMHs); $i++) {
-            array_push($mathangs, new MatHang(['tenMH' => $tenMHs[$i], 'don_gia' => $dongias[$i]]));
+            array_push($mathangs, new MatHang(['tenMH' => $tenMHs[$i], 'don_gia' => $dongias[$i], 'don_vi_tinh' => $donvis[$i]]));
         }
         foreach ($request->soluong as $k1 => $v1) {
             // $nhapkho1->mathang->pivot->so_luong = $request->soluong[$k1];
             array_push($soluongs, $v1);
         }
-        foreach ($request->donvi as $k2 => $v2) {
-            array_push($donvis, $v2);
-        }
         for ($i = 0; $i < count($mathangs); $i++) {
-            $mh1 = new MatHang(['tenMH' => $mathangs[$i]->tenMH, 'don_gia' => $mathangs[$i]->don_gia]);
+            $mh1 = new MatHang(['tenMH' => $mathangs[$i]->tenMH, 'don_gia' => $mathangs[$i]->don_gia, 'don_vi_tinh' => $mathangs[$i]->don_vi_tinh]);
             $mh1->save();
-            $nhapkho1->mathang()->attach($mh1->id, ['so_luong' => $soluongs[$i], 'don_vi' => $donvis[$i]]);
+            $nhapkho1->mathang()->attach($mh1->id, ['so_luong_nhap' => $soluongs[$i]]);
         }
 
         return redirect()->route('nhapkho.index')->with('Add success');

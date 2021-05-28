@@ -18,8 +18,8 @@ class MatHangNhapKho extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('nhap_kho_id');
             $table->bigInteger('mat_hang_id');
-            $table->integer('so_luong');
-            $table->string('don_vi');
+            $table->integer('so_luong_nhap');
+            // $table->string('don_vi');
         });
     }
 

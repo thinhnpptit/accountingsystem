@@ -14,9 +14,9 @@ class AddSoLuongToMatHangsTable extends Migration
     public function up()
     {
         Schema::table('mat_hangs', function (Blueprint $table) {
-            $table->integer('so_luong_trong_kho');
-            $table->integer('so_luong_nhap');
-            $table->integer('so_luong_uoc_tinh');
+            $table->integer('so_luong_trong_kho')->default(0);
+            // $table->integer('so_luong_nhap');
+            $table->integer('so_luong_uoc_tinh')->default(0);
         });
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MatHang extends Model
 {
     //
-    protected $fillable = ['tenMH', 'don_gia'];
+    protected $fillable = ['tenMH', 'don_gia', 'don_vi_tinh'];
 
     public function muahang()
     {
@@ -16,6 +16,6 @@ class MatHang extends Model
 
     public function nhapkho()
     {
-        return $this->belongsToMany(PhieuNhapKho::class)->withTimestamps()->withPivot('so_luong', 'don_vi');
+        return $this->belongsToMany(PhieuNhapKho::class)->withTimestamps()->withPivot('so_luong');
     }
 }

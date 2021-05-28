@@ -2,8 +2,8 @@
 <title>Danh Sách Phiếu Nhập Kho</title>
 @section('header')
 
-<linhapkho rel="stylesheet" type="text/css" href="/core/css/datatable.css">
-<linhapkho rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 <style>
     [cloak] {
         display: none !important;
@@ -17,17 +17,17 @@
         <div class="title"><strong>Danh Sách Phiếu Nhập Kho</strong></div>
         <div class="block-body">
                 <br>
-                <div id="txtshow">
+                <div align="center" id="txtshow">
                     <div class="table-responsive">
-                        <table id="tables" class="display" style="width:100%;">
+                        <table id="tables" class="display">
                             <thead>
                                 <tr class="table-active">
                                     <th>In Phiếu</th>
                                     <th>Sửa|Xoá </th>
                                     <th>ID Phiếu</th>
                                     <th>Ngày Nhập</th>
-                                    <th>Nhà Cung Cấp</th>
                                     <th>Người Lập Phiếu</th>
+                                    <th>Nhà Cung Cấp</th>
                                     <th>Tên hàng</th>
                                     <th>Số lượng</th>
                                     <th>Đơn vị</th>
@@ -55,13 +55,12 @@
                                     </td>
                                     <td class="table-active">{{ $mh1->id  }}</td>
                                     <td class="table-secondary">{{ $mh1->ngay_nhap   }}</td>
-                                    <td> {{ $mh1->nha_cc }} </td>
                                     <td> {{ \App\Models\NhanVien::find($mh1->nhanvien_id)->tenNV }} </td>
-
+                                    <td> {{ $mh1->nha_cc }} </td>
                                     {{-- @foreach (\App\Models\PhieuNhapKho::find($mh1->id)->mathang as $mh ) --}}
                                     <td> {{ \App\Models\MatHang::find($mh->pivot->mat_hang_id)->tenMH }} </td>
-                                    <td> {{ $mh->pivot->so_luong }} </td>
-                                    <td> {{ $mh->pivot->don_vi }} </td>
+                                    <td> {{ $mh->pivot->so_luong_nhap }} </td>
+                                    <td> {{ \App\Models\MatHang::find($mh->pivot->mat_hang_id)->don_vi_tinh }} </td>
                                     {{-- @endforeach --}}
                                     <td class="table-active"> {{ $mh1->tong_tien }} </td>
                                 </tr>

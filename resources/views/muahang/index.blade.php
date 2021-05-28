@@ -28,14 +28,8 @@
                                     <th>Người mua</th>
                                     <th>Ngày mua</th>
                                     <th>Tổng tiền</th>
-<<<<<<< HEAD
-                                    <th>Nhân viên</th>
-                                    <th>Print</th>
-                                    <th>Edit/Delete</th>
-=======
                                     <th>In phiếu</th>
                                     <th>Sửa/Xóa</th>
->>>>>>> upstream/main
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,12 +40,7 @@
                                      <td>{{ \App\Models\NhanVien::find($p->nhanvien_id)->tenNV }}</td>
                                     <td>{{ $p->ngay_mua   }}</td>
                                     <td class="table-active">{{ $p->thanh_tien   }}</td>
-<<<<<<< HEAD
-                                    <td> {{ $p->nhanvien->tenNV }} </td>
-                                    <td><a href="{{ route('muahang.show',$p->id)}}">Print</a> </td>
-=======
                                     <td><a href="{{ route('muahang.show',$p->id)}}">In Phiếu</a> </td>
->>>>>>> upstream/main
                                     <td>
                                         <a href="{{ route('muahang.edit', $p->id)}}">Sửa</a> |
                                         <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Xóa</a>

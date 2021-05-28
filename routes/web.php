@@ -42,14 +42,11 @@ Route::group(
             $controller = ucfirst($resource) . 'Controller';
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
-<<<<<<< HEAD
-
-        // Route::resource('invoices', 'InvoiceController');
-=======
         Route::resource('/muahang', 'MuahangController');
         Route::resource('/banhang', 'BanhangController');
         Route::resource('invoices', 'InvoiceController');
->>>>>>> upstream/main
+        Route::resource('/nhapkho', 'NhapKhoController');
+
 
         // Route::resource('ledger', 'Ledger');
         // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
@@ -174,7 +171,6 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('mhh');
             }
         )->name('mhInfo');
-
     }
 );
 
@@ -192,12 +188,6 @@ Route::fallback(
 );
 
 
-<<<<<<< HEAD
-Route::resource('/muahang', 'MuaHangController');
-Route::resource('/nhapkho', 'NhapKhoController');
-
-=======
->>>>>>> upstream/main
 // Verb        Path                            Action  Route Name
 // -------------------------------------------------------------------
 // GET         /resource                       index   resource.index

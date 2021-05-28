@@ -140,26 +140,16 @@
                     <span class="heading">Danh Mục</span>
                     <ul class="list-unstyled">
                         <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
-<<<<<<< HEAD
-                                    class="fa fa-file-text-o"></i>Phiếu Mua Hàng</a></li>
-                        <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Phiếu Thu Chi</a></li>
-                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
-                                    class="icon-padnote"></i>Phiếu Nhập Kho</a></li>
-                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
-                                    class="icon-padnote"></i>Phiếu Xuất Kho</a></li>
-=======
                                     class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
                         <li {{ activeIfRoute('banhang.create') }}><a href="{{ route('banhang.create') }}"> <i
                                     class="fa fa-file-text-o"></i>Quản lý bán hàng </a></li>
-                        <li {{ activeIfRoute('receipts.create') }}><a href="{{ route('receipts.create') }}"> <i
-                                    class="fa fa-file-text-o"></i>Receipt Voucher </a></li>
+                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
+                                    class="fa fa-file-text-o"></i> Phiếu nhập kho </a></li>
                         <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
-                                    class="icon-padnote"></i>Invoice </a></li>
-                        <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
-                                    class="icon-padnote"></i>Supplier Invoice </a></li>
+                                    class="icon-padnote"></i> Phiếu xuất kho </a></li>
+                        {{-- <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
+                                    class="icon-padnote"></i>Supplier Invoice </a></li> --}}
 
->>>>>>> upstream/main
                         <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
                                     class="icon-padnote"></i>Bảng Chấm Công</a></li>
                         <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
@@ -185,7 +175,7 @@
                             </ul>
                         </li>
                         <li
-                            {{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','nhapkho.index'] )}}>
+                            {{ activeIfRoute(['nhapkho.index','muahang.index','adjustments.index','nhapkho.index'] )}}>
                             <a href="ul#Records" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>All Records</a>
                             <ul id="Records" class="collapse list-unstyled ">
@@ -193,8 +183,8 @@
                                         href="{{ route('muahang.index') }}">Payment
                                         Voucher
                                         Records</a></li>
-                                <li {{ activeIfRoute('receipts.index') }}><a
-                                        href="{{ route('receipts.index') }}">Receipt
+                                <li {{ activeIfRoute('nhapkho.index') }}><a
+                                        href="{{ route('nhapkho.index') }}">Receipt
                                         Voucher
                                         Records</a></li>
                                 <li {{ activeIfRoute('nhapkho.index') }}><a
@@ -305,7 +295,7 @@
         if ('{{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create']) }}') {
             setTimeout(function() { $('ul#Accounts').addClass('show'); } ,200);
         }
-        if ('{{ activeIfRoute(['receipts.index','muahang.index','adjustments.index','nhapkho.index'] ) }}') {
+        if ('{{ activeIfRoute(['nhapkho.index','muahang.index','adjustments.index','nhapkho.index'] ) }}') {
             setTimeout(function() { $('ul#Records').addClass('show') } ,200);
         }
 
