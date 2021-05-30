@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhieuNhapKhosTable extends Migration
+class CreateMatHangPhieuXuatKhoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreatePhieuNhapKhosTable extends Migration
      */
     public function up()
     {
-        Schema::create('phieu_nhap_khos', function (Blueprint $table) {
+        Schema::create('mat_hang_phieu_xuat_kho', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('ngay_nhap');
-            $table->string('nha_cc');
-            $table->integer('nhanvien_id');
-            $table->bigInteger('tong_tien');
-            // $table->integer('so_luong');
-            // $table->string('don_vi');
+            $table->bigInteger('phieu_xuat_kho_id');
+            $table->bigInteger('mat_hang_id');
+            $table->integer('so_luong');
+            $table->double('don_gia');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreatePhieuNhapKhosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phieu_nhap_khos');
+        Schema::dropIfExists('mat_hang_phieu_xuat_kho');
     }
 }

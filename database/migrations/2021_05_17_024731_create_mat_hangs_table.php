@@ -16,7 +16,7 @@ class CreateMatHangsTable extends Migration
         Schema::create('mat_hangs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tenMH');
-            $table->float('don_gia');
+            $table->bigInteger('don_gia');
             $table->string('nhaCC')->nullable(true);
             $table->timestamps();
         });

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\MatHang;
 use App\Models\NhanVien;
 use App\Models\HoaDonBanHang;
+use App\Models\PhieuNhapKho;
+use App\Models\PhieuXuatKho;
 use Illuminate\Http\Request;
 
-class BanhangController extends Controller
+class XuatkhoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +18,9 @@ class BanhangController extends Controller
      */
     public function index()
     {
-        $banhangs = HoaDonBanHang::all();
+        $banhangs = PhieuXuatKho::all();
 
-        return view('banhang.index', compact('banhangs'));
+        return view('xuatkho.index', compact('xuatkhos'));
     }
 
     /**
@@ -31,7 +33,7 @@ class BanhangController extends Controller
         $mathangs = MatHang::all();
         $nhanvien = NhanVien::all();
 
-        return view('banhang.create', compact('mathangs', 'nhanvien'));
+        return view('xuatkho.create', compact('mathangs', 'nhanvien'));
     }
 
     /**
@@ -42,7 +44,13 @@ class BanhangController extends Controller
      */
     public function store(Request $request)
     {
-        $bangMH = array();
+        $xuatkho = new PhieuXuatKho();
+        $xuatkho->ngay_xuat = $request->ngay;
+        $xuatkho->nhanvien_id = $request->nhanvien;
+        $xuatkho->tong_hang = $request->tongso;
+        $xuatkho->ly_do = $request->lydo;
+        $xuatkho->tong_tien = $request->thanhtien;
+        $xuatkho->save();
         for ($i=1; $i<6; $i++)
         {
             $id = 'maMH'.$i;
@@ -50,22 +58,15 @@ class BanhangController extends Controller
             $so = 'value'.$i;
             if (isset($request->$id ))
             {
-                $MH = array('id:'.$request->$id,
-                    'dongia:'.$request->$gia,
-                    'soluong:'.$request->$so);
-                $bangMH[$i] = implode(',',$MH);
+                $MH = MatHang::find($request->$id);
+                $trongkho = $MH->so_luong_trong_kho - $request->$so;
+                $MH->update([
+                    'so_luong_trong_kho' => $trongkho]);
+                $xuatkho->mathang()->attach($MH->id, ['so_luong' => $request->$so, 'don_gia' => $request->$gia]);
             }
         }
-        $phieuban = new HoaDonBanHang();
-        $phieuban->nhanvien_id = $request->nhanvien;
-        $phieuban->khachhang = $request->khachhang;
-        $phieuban->ngay_mua = $request->ngay;
-        $phieuban->thanhtien = $request->thanhtien;
-        $phieuban->phieuthu_id = '0';
-        $phieuban->bang_mathang = implode(';',$bangMH);
-        $phieuban->save();
 
-        return redirect()->route('banhang.index')->with('Add success');
+        return redirect()->route('xuatkho.create')->with('Add success');
     }
 
     /**

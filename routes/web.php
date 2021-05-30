@@ -44,9 +44,10 @@ Route::group(
         }
         Route::resource('/muahang', 'MuahangController');
         Route::resource('/banhang', 'BanhangController');
+        Route::resource('/mathang', 'MathangController');
         Route::resource('invoices', 'InvoiceController');
         Route::resource('/nhapkho', 'NhapKhoController');
-
+        Route::resource('/xuatkho', 'XuatkhoController');
 
         // Route::resource('ledger', 'Ledger');
         // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');

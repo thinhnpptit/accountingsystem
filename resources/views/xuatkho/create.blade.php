@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    <title>Hóa đơn bán</title>
+    <title>Phiếu xuất kho</title>
     <link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
     <style>
@@ -14,15 +14,15 @@
 @section('content')
     <div class="col-lg-12" v-cloak>
         <div class="block">
-            <form name="form" id="newAccount" action="{{ route("banhang.store")}}" method="post">
+            <form name="form" id="newAccount" action="{{ route("xuatkho.store")}}" method="post">
                 @csrf
-                <div class="title"><strong>Thêm Hoá Đơn Bán</strong></div>
+                <div class="title"><strong>Tạo phiếu xuất kho</strong></div>
                     <br>
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label class="col-md-12 control-label" for="selectbasic" class="form-control">Nhân viên bán hàng</label>
+                                <div class="col-md-3">
+                                    <label class="col-md-12 control-label" for="selectbasic" class="form-control">Người nhận</label>
                                     <select class=" form-control" id="nhanvien" name="nhanvien" v-model='newChartid'>
                                         <option value='null' disabled>Chọn nhân viên</option>
                                         @foreach ($nhanvien as $nv)
@@ -30,10 +30,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 control-label" for="selectbasic">Khách hàng mua</label>
-                                    <input class="form-control" placeholder="Họ và tên khách" name="khachhang" />
                                 </div>
                                 <div class="col-md-3">
                                     <label class="col-md-6 control-label" for="selectbasic"
@@ -57,10 +53,13 @@
                                 <div class="col-md-3">
                                     <label class="col-md-8 control-label" for="selectbasic">Tên mặt Hàng</label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label class="col-md-8 control-label" for="selectbasic">Đơn giá</label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-md-8 control-label" for="selectbasic">Đơn vị</label>
+                                </div>
+                                <div class="col-md-2">
                                     <label class="col-md-8 control-label" for="selectbasic">Số Lượng</label>
                                 </div>
                             </div>
@@ -86,10 +85,13 @@
                                 <div class="col-md-3">
                                     <input class="form-control" type="text" id="tenMH1" name="tenMH1" value="{{ old('gia1') }}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <input class="form-control" type="text" id="gia1" name="gia1" value="{{ old('gia1') }}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" id="donvi1" name="donvi1" value="{{ old('donvi1') }}">
+                                </div>
+                                <div class="col-md-2">
                                     <input class="col-md-8 form-control" id="soluong1" v-model=v1
                                         name="value1" value="{{ old('soluong1')}}" placeholder="0"
                                            type="number" vueAttribute='v1'>
@@ -117,10 +119,13 @@
                             <div class="col-md-3">
                                 <input class="form-control" type="text" id="tenMH2" name="tenMH2" value="{{ old('tenMH2') }}">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <input class="form-control" type="text" id="gia2" name="gia2" value="{{ old('gia2') }}">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" id="donvi2" name="donvi2" value="{{ old('donvi2') }}">
+                            </div>
+                            <div class="col-md-2">
                                 <input class="col-md-8 form-control" id="soluong2" v-model=v2
                                        name="value2" value="{{ old('soluong2')}}" placeholder="0"
                                        type="number" vueAttribute='v2'>
@@ -148,10 +153,13 @@
                                 <div class="col-md-3">
                                     <input class="form-control" type="text" id="tenMH3" name="tenMH3" value="{{ old('tenMH3') }}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <input class="form-control" type="text" id="gia3" name="gia3" value="{{ old('gia3') }}">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" id="donvi3" name="donvi3" value="{{ old('donvi3') }}">
+                                </div>
+                                <div class="col-md-2">
                                     <input class="col-md-8 form-control" id="soluong3" v-model=v3
                                            name="value3" value="{{ old('soluong3')}}" placeholder="0"
                                            type="number" vueAttribute='v3'>
@@ -179,10 +187,13 @@
                             <div class="col-md-3">
                                 <input class="form-control" type="text" id="tenMH4" name="tenMH4" value="{{ old('tenMH4') }}">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <input class="form-control" type="text" id="gia4" name="gia4" value="{{ old('gia4') }}">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" id="donvi4" name="donvi4" value="{{ old('donvi4') }}">
+                            </div>
+                            <div class="col-md-2">
                                 <input class="col-md-8 form-control" id="soluong4" v-model=v4
                                        name="value4" value="{{ old('soluong4')}}" placeholder="0"
                                        type="number" vueAttribute='v4'>
@@ -210,10 +221,13 @@
                                     <div class="col-md-3">
                                         <input class="form-control" type="text" id="tenMH5" name="tenMH5" value="{{ old('tenMH5') }}">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <input class="form-control" type="text" id="gia5" name="gia5" value="{{ old('gia5') }}">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
+                                        <input class="form-control" type="text" id="donvi5" name="donvi5" value="{{ old('donvi5') }}">
+                                    </div>
+                                    <div class="col-md-2">
                                         <input class="col-md-8 form-control" id="soluong5" v-model=v5
                                                name="value5" value="{{ old('soluong5')}}" placeholder="0"
                                                type="number" vueAttribute='v5'>
@@ -223,11 +237,19 @@
                         </div>
                     <hr>
                     <div class="form-group row" id='totals'>
-                        <div class="col-sm-9">
+                        <div class="col-12">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
+                                <div class="col-md-3">
+                                    <label class="col-md-4 control-label" for="selectbasic">Tổng tiền</label>
                                     <input class="form-control" type="text" name="thanhtien">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="col-md-4 control-label" for="selectbasic">Tổng số</label>
+                                    <input class="form-control" type="text" name="tongso">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="col-md-4 control-label" for="selectbasic">Lý do xuất kho</label>
+                                    <textarea class="form-control" type="text" name="lydo"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -295,6 +317,9 @@
                     $("#gia1").val(function() {
                         return mathang.don_gia;
                     });
+                    $("#donvi1").val(function() {
+                        return mathang.don_vi_tinh;
+                    });
                 });
             });
         }
@@ -311,6 +336,9 @@
                     });
                     $("#gia2").val(function() {
                         return mathang.don_gia;
+                    });
+                    $("#donvi2").val(function() {
+                        return mathang.don_vi_tinh;
                     });
                 });
             });
@@ -329,6 +357,9 @@
                     $("#gia3").val(function() {
                         return mathang.don_gia;
                     });
+                    $("#donvi3").val(function() {
+                        return mathang.don_vi_tinh;
+                    });
                 });
             });
         }
@@ -346,6 +377,9 @@
                     $("#gia4").val(function() {
                         return mathang.don_gia;
                     });
+                    $("#donvi4").val(function() {
+                        return mathang.don_vi_tinh;
+                    });
                 });
             });
         }
@@ -362,6 +396,9 @@
                     });
                     $("#gia5").val(function() {
                         return mathang.don_gia;
+                    });
+                    $("#donvi5").val(function() {
+                        return mathang.don_vi_tinh;
                     });
                 });
             });
@@ -386,11 +423,11 @@
         }
 
         function showAll(){
-            location.href="<?php echo e(route("banhang.index")); ?>"
+            location.href="<?php echo e(route("xuatkho.index")); ?>"
         }
 
         function save() {
-            location.href=" <?php echo e(route("banhang.store")); ?> "
+            location.href=" <?php echo e(route("xuatkho.store")); ?> "
         }
 
     </script>
