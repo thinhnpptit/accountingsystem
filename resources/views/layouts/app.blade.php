@@ -149,9 +149,8 @@
                                     class="icon-padnote"></i> Phiếu xuất kho </a></li>
                         <li {{ activeIfRoute('mathang.create') }}><a href="{{ route('mathang.create') }}"> <i
                                 class="fa fa-file-text-o"></i>Quản lý Mặt hàng</a></li>
-                        {{-- <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
-                                    class="icon-padnote"></i>Supplier Invoice </a></li> --}}
-
+                        <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('chi.create') }}"> <i
+                                    class="icon-padnote"></i>Phiếu chi </a></li>
                         <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
                                     class="icon-padnote"></i>Bảng Chấm Công</a></li>
                         <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
@@ -164,39 +163,6 @@
                                         href="{{ route('accounts.create') }}">Bảng Lương</a></li>
                             </ul>
                         </li>
-                        <!-- <li {{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create'] )}}>
-                            <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
-                                    class="icon-windows"></i>Create Account</a>
-                            <ul id="Accounts" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('chartaccounts.create') }}><a
-                                        href="{{ route('chartaccounts.create') }}">Chart Of Account</a></li>
-                                <li {{ activeIfRoute('accounts.create') }}><a href="{{ route('accounts.create') }}">Main
-                                        Account</a></li>
-                                <li {{ activeIfRoute('subaccounts.create') }}><a
-                                        href="{{ route('subaccounts.create') }}">Sub Account</a></li>
-                            </ul>
-                        </li>
-                        <li
-                            {{ activeIfRoute(['nhapkho.index','muahang.index','adjustments.index','nhapkho.index'] )}}>
-                            <a href="ul#Records" aria-expanded="false" data-toggle="collapse"> <i
-                                    class="icon-windows"></i>All Records</a>
-                            <ul id="Records" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('muahang.index') }}><a
-                                        href="{{ route('muahang.index') }}">Payment
-                                        Voucher
-                                        Records</a></li>
-                                <li {{ activeIfRoute('nhapkho.index') }}><a
-                                        href="{{ route('nhapkho.index') }}">Receipt
-                                        Voucher
-                                        Records</a></li>
-                                <li {{ activeIfRoute('nhapkho.index') }}><a
-                                        href="{{ route('nhapkho.index') }}">Invoice
-                                        Records</a></li>
-                                <li {{ activeIfRoute('adjustments.index')    }}><a
-                                        href="{{ route('adjustments.index') }}">Adjustment
-                                        Records</a></li>
-                            </ul>
-                        </li> -->
                     </ul>
                 </nav>
                 <!-- Sidebar Navigation end-->

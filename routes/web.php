@@ -46,13 +46,9 @@ Route::group(
         Route::resource('/banhang', 'BanhangController');
         Route::resource('/mathang', 'MathangController');
         Route::resource('invoices', 'InvoiceController');
+        Route::resource('/chi', 'PhieuchiController');
         Route::resource('/nhapkho', 'NhapKhoController');
         Route::resource('/xuatkho', 'XuatkhoController');
-
-        // Route::resource('ledger', 'Ledger');
-        // Route::get('/invoice/supplier_create', 'InvoiceController@supplier_create')->name('SupplierI');
-
-
 
         foreach (['account', 'chartaccount', 'subaccount'] as $resource) {
             $prefix = Str::plural($resource);
@@ -93,6 +89,14 @@ Route::middleware('auth')->prefix('api/')->group(
             function (Request $request) {
                 $mathangs = \App\Models\MatHang::all();
                 return compact('mathangs');
+            }
+        );
+
+        Route::get(
+            'muahangs',
+            function (Request $request) {
+                $muahangs = \App\Models\PhieuMuaHang::all();
+                return compact('muahangs');
             }
         );
 
@@ -172,6 +176,21 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('mhh');
             }
         )->name('mhInfo');
+
+        Route::get(
+            'muahangInfo',
+            function (Request $request) {
+                $ma = request('ma');
+                Log::debug($ma);
+                $mh = \App\Models\PhieuMuaHang::all()->groupBy('id');
+                if ($mh) {
+                    $mhh = $mh->get($ma);
+                } else {
+                    return 0;
+                }
+                return compact('mhh');
+            }
+        )->name('muahangInfo');
     }
 );
 
