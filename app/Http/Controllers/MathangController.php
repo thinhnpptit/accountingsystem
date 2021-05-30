@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatHang;
-use App\Models\NhanVien;
-use App\Models\HoaDonBanHang;
 use Illuminate\Http\Request;
 
-class BanhangController extends Controller
+class MathangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,8 @@ class BanhangController extends Controller
      */
     public function index()
     {
-        $banhangs = HoaDonBanHang::all();
 
-        return view('banhang.index', compact('banhangs'));
+        return view('mathang.index');
     }
 
     /**
@@ -28,10 +25,7 @@ class BanhangController extends Controller
      */
     public function create()
     {
-        $mathangs = MatHang::all();
-        $nhanvien = NhanVien::all();
-
-        return view('banhang.create', compact('mathangs', 'nhanvien'));
+        return view('mathang.create');
     }
 
     /**
@@ -42,30 +36,16 @@ class BanhangController extends Controller
      */
     public function store(Request $request)
     {
-        $bangMH = array();
-        for ($i=1; $i<6; $i++)
-        {
-            $id = 'maMH'.$i;
-            $gia = 'gia'.$i;
-            $so = 'value'.$i;
-            if (isset($request->$id ))
-            {
-                $MH = array('id:'.$request->$id,
-                    'dongia:'.$request->$gia,
-                    'soluong:'.$request->$so);
-                $bangMH[$i] = implode(',',$MH);
-            }
-        }
-        $phieuban = new HoaDonBanHang();
-        $phieuban->nhanvien_id = $request->nhanvien;
-        $phieuban->khachhang = $request->khachhang;
-        $phieuban->ngay_mua = $request->ngay;
-        $phieuban->thanhtien = $request->thanhtien;
-        $phieuban->phieuthu_id = '0';
-        $phieuban->bang_mathang = implode(';',$bangMH);
-        $phieuban->save();
-
-        return redirect()->route('banhang.index')->with('Add success');
+        $mathang = new MatHang(['tenMH' => $request->tenMH,
+            'nhaCC' => $request->nhacc,
+            'don_gia' => $request->gia,
+            'don_vi_tinh' => $request->donvi,
+            'so_luong_trong_kho' => $request->value1,
+            'so_luong_nhap' => 0,
+            'so_luong_uoc_tinh' => 0,
+        ]);
+        $mathang->save();
+        return view('mathang.create');
     }
 
     /**

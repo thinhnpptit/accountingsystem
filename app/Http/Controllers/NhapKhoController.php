@@ -42,40 +42,41 @@ class NhapKhoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $nhapkho = new PhieuNhapKho;
-        $mathangs = array();
-        $tenMHs = array();
-        $dongias = array();
-        $soluongs = array();
-        $donvis = array();
+        $tenMHs = $request->tenMH;
+        $dongias = $request->dongia;
+        $soluongs = $request->soluong;
+        $donvis = $request->donvi;
 
         $nhapkho->ngay_nhap = $request->ngaynhap;
         $nhapkho->nha_cc = $request->nhacc;
         $nhapkho->nhanvien_id = $request->nhanvien;
         $nhapkho->tong_tien = $request->tongtien;
-        foreach ($request->tenMH as $k3 => $v3) {
-            array_push($tenMHs, $request->tenMH[$k3]);
-        }
-        foreach ($request->dongia as $k4 => $v4) {
-            array_push($dongias, $request->dongia[$k4]);
-        }
-        foreach ($request->donvi as $k2 => $v2) {
-            array_push($donvis, $v2);
-        }
         $nhapkho->save();
-        $nhapkho1 = PhieuNhapKho::find($nhapkho->id);
+
         for ($i = 0; $i < count($tenMHs); $i++) {
-            array_push($mathangs, new MatHang(['tenMH' => $tenMHs[$i], 'don_gia' => $dongias[$i], 'don_vi_tinh' => $donvis[$i]]));
-        }
-        foreach ($request->soluong as $k1 => $v1) {
-            // $nhapkho1->mathang->pivot->so_luong = $request->soluong[$k1];
-            array_push($soluongs, $v1);
-        }
-        for ($i = 0; $i < count($mathangs); $i++) {
-            $mh1 = new MatHang(['tenMH' => $mathangs[$i]->tenMH, 'don_gia' => $mathangs[$i]->don_gia, 'don_vi_tinh' => $mathangs[$i]->don_vi_tinh]);
-            $mh1->save();
-            $nhapkho1->mathang()->attach($mh1->id, ['so_luong_nhap' => $soluongs[$i]]);
+            $isMathang = MatHang::where('tenMH', '=', $tenMHs[$i])->first();
+            $mh = new MatHang();
+            $mh->tenMH = $tenMHs[$i];
+            $mh->nhaCC = $request->nhacc;
+            $mh->don_gia = $dongias[$i];
+            $mh->don_vi_tinh = $donvis[$i];
+            $mh->so_luong_trong_kho = $soluongs[$i];
+            $mh->so_luong_nhap = $soluongs[$i];
+            $mh->so_luong_uoc_tinh = 0;
+
+            if ($isMathang != null) {
+                $isMathang->update(array(
+                    'nhaCC' => $request->nhacc,
+                    'so_luong_trong_kho' => $isMathang->so_luong_trong_kho + $soluongs[$i],
+                    'so_luong_nhap' => $isMathang->so_luong_nhap + $soluongs[$i],
+                ));
+                $nhapkho->mathang()->attach($isMathang->id, ['so_luong_nhap' => $soluongs[$i]]);
+            } else {
+                $mh->save();
+                $nhapkho->mathang()->attach($mh->id, ['so_luong_nhap' => $soluongs[$i]]);
+
+            }
         }
 
         return redirect()->route('nhapkho.index')->with('Add success');

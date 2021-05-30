@@ -145,8 +145,10 @@
                                     class="fa fa-file-text-o"></i>Quản lý bán hàng </a></li>
                         <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
                                     class="fa fa-file-text-o"></i> Phiếu nhập kho </a></li>
-                        <li {{ activeIfRoute('invoices.create') }}><a href="{{ route('invoices.create') }}"> <i
+                        <li {{ activeIfRoute('xuatkho.create') }}><a href="{{ route('xuatkho.create') }}"> <i
                                     class="icon-padnote"></i> Phiếu xuất kho </a></li>
+                        <li {{ activeIfRoute('mathang.create') }}><a href="{{ route('mathang.create') }}"> <i
+                                class="fa fa-file-text-o"></i>Quản lý Mặt hàng</a></li>
                         {{-- <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('SupplierI') }}"> <i
                                     class="icon-padnote"></i>Supplier Invoice </a></li> --}}
 
