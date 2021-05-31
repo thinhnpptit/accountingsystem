@@ -57,10 +57,11 @@
                                     <select class="form-control" name="donvi[]">
                                         <option value="kg">kg</option>
                                         <option value="chiếc">chiếc</option>
-                                        <option value="chiếc">m</option>
-                                        <option value="chiếc">m2</option>
-                                        <option value="chiếc">m3</option>
-                                        <option value="chiếc">lít</option>
+                                        <option value="m">m</option>
+                                        <option value="m2">m2</option>
+                                        <option value="m3">m3</option>
+                                        <option value="lít">lít</option>
+                                        <option value="bộ">bộ</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2">
@@ -143,7 +144,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(x < max_fields){ //max input box allowed
 			x++; //text box increment
-			$(wrapper).append('<div><div></div></div><div class="form-group row" style="width:100%; padding: 15px;" > <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label> <input class="form-control" name="tenMH[]"> </div> <div class="col-md-2"> <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label> <select class="form-control" name="donvi[]"> <option value="kg">kg</option> <option value="chiếc">chiếc</option> </select> </div> <div class="col-md-2"> <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label> <input class="form-control" name="soluong[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label> <input class="form-control" name="dongia[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Thành Tiền</label> <input class="form-control"> </div><div class="col-md-1"><button class="remove_field col-md-8">Xóa</button></div></div> </div></div></div></div>'); //add input box
+			$(wrapper).append('<div><div></div></div><div class="form-group row" style="width:100%; padding: 15px;" > <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label> <input class="form-control" name="tenMH[]"> </div> <div class="col-md-2"> <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label> <select class="form-control" name="donvi[]"> <option value="kg">kg</option> <option value="chiếc">chiếc</option> <option value="m">m</option> <option value="m2">m2</option> <option value="m3">m3</option> <option value="lít">lít</option> <option value="bộ">bộ</option> </select> </div> <div class="col-md-2"> <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label> <input class="form-control" name="soluong[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label> <input class="form-control" name="dongia[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Thành Tiền</label> <input class="form-control"> </div><div class="col-md-1"><button class="remove_field col-md-8">Xóa</button></div></div> </div></div></div></div>'); //add input box
 		}
 	});
 

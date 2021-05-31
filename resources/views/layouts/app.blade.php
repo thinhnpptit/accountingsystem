@@ -157,10 +157,10 @@
                             <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>Quản Lý Lương</a>
                             <ul id="Accounts" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('chartaccounts.create') }}><a
-                                        href="{{ route('chartaccounts.create') }}">Bảng Chấm Công</a></li>
-                                <li {{ activeIfRoute('accounts.create') }}><a
-                                        href="{{ route('accounts.create') }}">Bảng Lương</a></li>
+                                <li {{ activeIfRoute('luong.create') }}><a
+                                        href="{{ route('luong.create') }}">Tạo mới Lương</a></li>
+                                <li {{ activeIfRoute('luong.index') }}><a
+                                        href="{{ route('luong.index') }}">Bảng Lương</a></li>
                             </ul>
                         </li>
                     </ul>
