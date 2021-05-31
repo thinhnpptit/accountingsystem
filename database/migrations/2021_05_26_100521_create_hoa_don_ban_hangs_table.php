@@ -17,7 +17,7 @@ class CreateHoaDonBanHangsTable extends Migration
             $table->bigIncrements('id');
             $table->string('bang_mathang');
             $table->bigInteger('nhanvien_id');
-            $table->float('thanhtien');
+            $table->bigInteger('thanhtien');
             $table->date('ngay_mua');
             $table->string('khachhang');
             $table->bigInteger('phieuthu_id');
