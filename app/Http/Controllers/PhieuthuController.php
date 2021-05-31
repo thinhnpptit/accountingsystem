@@ -46,7 +46,7 @@ class PhieuthuController extends Controller
      */
     public function store(Request $request)
     {
-        $thu = new Phieuthu();
+        $thu = new PhieuThu();
         $thu->nhan_vien_id = $request->nhanvien;
         $thu->ngay = $request->ngay;
         $thu->noi_dung = $request->lydo5;
