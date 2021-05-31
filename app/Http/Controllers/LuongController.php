@@ -49,7 +49,7 @@ class LuongController extends Controller
         $luong->nhanvien_id = $request->nhanvien;
         $luong->tongluong =  round(($request->coban/23)*$request->cong+$request->thuong);
         $luong->bhyt =  round($request->coban*0.015);
-        $luong->thuecanhan =  0.1*round($request->luongcoban);
+        $luong->thuecanhan =  0.1*$request->coban;
         $luong->tongnhan =  round($luong->tongluong - $luong->bhyt - $luong->thuecanhan);
         $luong->trangthai = 'chưa thanh toán';
         $luong->save();
