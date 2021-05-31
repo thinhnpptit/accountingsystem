@@ -94,14 +94,13 @@ return [
             'prefix' => '',
             'strict' => false,
             'engine' => null,
-            'modes' => [
-                'ONLY_FULL_GROUP_BY',
-                'STRICT_TRANS_TABLES',
-                'NO_ZERO_IN_DATE',
-                'NO_ZERO_DATE',
-                'ERROR_FOR_DIVISION_BY_ZERO',
-                'NO_ENGINE_SUBSTITUTION',
-            ],
+            'sslmode' => 'require',
+            'options'   => array(
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                PDO::MYSQL_ATTR_SSL_KEY => '/certs/client-key.pem',
+                PDO::MYSQL_ATTR_SSL_CERT => '/certs/client-cert.pem',
+                PDO::MYSQL_ATTR_SSL_CA => '/certs/ca.pem',
+            ),
         ],
 
         'pgsql' => [
