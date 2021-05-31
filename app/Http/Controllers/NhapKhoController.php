@@ -61,20 +61,19 @@ class NhapKhoController extends Controller
             $mh->don_gia = $dongias[$i];
             $mh->don_vi_tinh = $donvis[$i];
             $mh->so_luong_trong_kho = $soluongs[$i];
-            $mh->so_luong_nhap = $soluongs[$i];
+            $mh->nhapkho->so_luong_nhap = $soluongs[$i];
             $mh->so_luong_uoc_tinh = 0;
 
             if ($isMathang != null) {
                 $isMathang->update(array(
                     'nhaCC' => $request->nhacc,
                     'so_luong_trong_kho' => $isMathang->so_luong_trong_kho + $soluongs[$i],
-                    'so_luong_nhap' => $isMathang->so_luong_nhap + $soluongs[$i],
+                    'so_luong_nhap' => $isMathang->nhapkho->so_luong_nhap + $soluongs[$i],
                 ));
                 $nhapkho->mathang()->attach($isMathang->id, ['so_luong_nhap' => $soluongs[$i]]);
             } else {
                 $mh->save();
                 $nhapkho->mathang()->attach($mh->id, ['so_luong_nhap' => $soluongs[$i]]);
-
             }
         }
 
