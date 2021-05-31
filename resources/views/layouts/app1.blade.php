@@ -59,10 +59,10 @@
             display: none;
         }
 
-        #PMH,
-        #PBH {
+        #PMH, #PBH{
             display: none;
         }
+
     </style>
 
     @yield('header')
@@ -98,8 +98,10 @@
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="navbar-header">
                     <!-- Navbar Header--><a href="/" class="navbar-brand">
-                        <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">THU</strong> <strong>GỌN</strong></div>
-                        <div class="brand-text brand-sm"><strong class="text-primary">MỞ</strong> <strong>RỘNG</strong></div>
+                        <div class="brand-text brand-big visible text-uppercase"><strong
+                                class="text-primary">THU</strong> <strong>GỌN</strong></div>
+                        <div class="brand-text brand-sm"><strong
+                                class="text-primary">MỞ</strong> <strong>RỘNG</strong></div>
                     </a>
                     <!-- Sidebar Toggle Btn-->
                     <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
@@ -108,8 +110,10 @@
 
                 <div class="list-inline-item logout">
 
-                    <a id="logout" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <span style='color:blue'> {{ Auth::user()->name }} </span> | Đăng xuất <i class="icon-logout"></i>
+                    <a id="logout" href="{{ route('logout') }}" class="nav-link"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <span style='color:blue'> {{ Auth::user()->name }} </span> | Đăng xuất <i
+                            class="icon-logout"></i>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         {{ csrf_field() }}
@@ -129,25 +133,29 @@
                 </div>
                 <div class="title">
                     <h1 class="h5">Trang Chủ</h1>
-                    <p>TNHH_HoangLinh</p>
+                    <p>HTQLKT</p>
                 </div>
             </div>
 
             <span class="heading">Danh Mục</span>
             <ul class="list-unstyled">
-                <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i class="fa fa-file-text-o"></i>Quản lý Mua hàng </a></li>
-                <li {{ activeIfRoute('banhang.create') }}><a href="{{ route('banhang.create') }}"> <i class="fa fa-file-text-o"></i>Quản lý Bán hàng </a></li>
-                <li {{ activeIfRoute(['nhapkho.create','xuatkho.create'])}}>
-                    <a href="ul#Kho" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Quản lý Kho</a>
-                    <ul id="Kho" class="collapse list-unstyled ">
-                        <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> Phiếu Nhập kho </a></li>
-                        <li {{ activeIfRoute('xuatkho.create') }}><a href="{{ route('xuatkho.create') }}"> Phiếu Xuất kho </a></li>
-                        <li {{ activeIfRoute('mathang.create') }}><a href="{{ route('mathang.create') }}">Quản lý Mặt hàng trong kho</a></li>
-                    </ul>
-                </li>
-
-                <li {{ activeIfRoute(['luong.create','luong.index'])}}>
-                    <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Quản lý Lương</a>
+                <li {{ activeIfRoute('muahang.create') }}><a href="{{ route('muahang.create') }}"> <i
+                            class="fa fa-file-text-o"></i>Quản lý mua hàng </a></li>
+                <li {{ activeIfRoute('banhang.create') }}><a href="{{ route('banhang.create') }}"> <i
+                            class="fa fa-file-text-o"></i>Quản lý bán hàng </a></li>
+                <li {{ activeIfRoute('nhapkho.create') }}><a href="{{ route('nhapkho.create') }}"> <i
+                            class="fa fa-file-text-o"></i> Phiếu nhập kho </a></li>
+                <li {{ activeIfRoute('xuatkho.create') }}><a href="{{ route('xuatkho.create') }}"> <i
+                            class="icon-padnote"></i> Phiếu xuất kho </a></li>
+                <li {{ activeIfRoute('mathang.create') }}><a href="{{ route('mathang.create') }}"> <i
+                            class="fa fa-file-text-o"></i>Quản lý Mặt hàng</a></li>
+                <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('chi.create') }}"> <i
+                            class="icon-padnote"></i>Phiếu chi </a></li>
+                <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('thu.create') }}"> <i
+                            class="icon-padnote"></i>Phiếu thu</a></li>
+                <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
+                    <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
+                            class="icon-windows"></i>Quản Lý Lương</a>
                     <ul id="Accounts" class="collapse list-unstyled ">
                         <li {{ activeIfRoute('luong.create') }}><a
                                 href="{{ route('luong.create') }}">Tạo mới Lương</a></li>
@@ -179,7 +187,8 @@
                         @if ($errors->any())
                             <div id='errors' class="alert alert-danger">
                                 <div style="display:block; float:right">
-                                    <a href='#' style='right; color:red ; weight:bold; text-decoration:none' onclick='$("#errors").hide()'>X</a>
+                                    <a href='#' style='right; color:red ; weight:bold; text-decoration:none'
+                                       onclick='$("#errors").hide()'>X</a>
                                 </div>
                                 <ul>
                                     @foreach (array_unique($errors->all()) as $error)
@@ -191,7 +200,8 @@
                         {{-- This is for Vue / axios error messages --}}
                         <div v-if='errors' v-cloak id='vue-errors' class="alert alert-danger col-md-5">
                             <div style="display:block; float:right">
-                                <a href='#' style='right; color:red ; weight:bold; text-decoration:none' v-on:click='errors=null'>X</a>
+                                <a href='#' style='right; color:red ; weight:bold; text-decoration:none'
+                                   v-on:click='errors=null'>X</a>
                             </div>
                             <ul>
                                 <li v-for='error in errors'>@{{ error[0] }}</li>
@@ -199,17 +209,19 @@
                         </div>
                         @yield('content')
                         @if (Session::has('message'))
-                            <span id='message' class="alert alert-success" style="position:absolute; z-index:99999 ; right:30px; top:60px">
-                                <ul>
-                                    <li>{!! Session::get('message')!!}</li>
-                                </ul>
-                            </span>
+                            <span id='message' class="alert alert-success"
+                                  style="position:absolute; z-index:99999 ; right:30px; top:60px">
+                                    <ul>
+                                        <li>{!! Session::get('message')!!}</li>
+                                    </ul>
+                                </span>
                         @endif
-                        <span v-cloak v-if='message' id='message' class="alert alert-success" style="position:absolute; z-index:99999 ; right:30px; top:60px">
-                                <ul>
-                                    <li>@{{ message }}</li>
-                                </ul>
-                            </span>
+                        <span v-cloak v-if='message' id='message' class="alert alert-success"
+                              style="position:absolute; z-index:99999 ; right:30px; top:60px">
+                                    <ul>
+                                        <li>@{{ message }}</li>
+                                    </ul>
+                                </span>
 
                     </div>
                 </div>
@@ -243,33 +255,21 @@
 @if(Session::has('message'))
     <script src='/js/jquery-ui.min.js'></script>
     <script>
-        setTimeout(function() {
-            $("#message.alert-success").fadeOut(2500, 'swing')
-        }, 2000);
+        setTimeout( function() {$( "#message.alert-success" ).fadeOut(2500,'swing')} ,2000);
     </script>
 @endif
 
 <script>
-    if ('{{ activeIfRoute(['
-        chartaccounts.create ','
-        accounts.create ','
-        subaccounts.create ']) }}') {
-        setTimeout(function() {
-            $('ul#Accounts').addClass('show');
-        }, 200);
+    if ('{{ activeIfRoute(['chartaccounts.create','accounts.create','subaccounts.create']) }}') {
+        setTimeout(function() { $('ul#Accounts').addClass('show'); } ,200);
     }
-    if ('{{ activeIfRoute(['
-        nhapkho.index ','
-        muahang.index ','
-        adjustments.index ','
-        nhapkho.index '] ) }}') {
-        setTimeout(function() {
-            $('ul#Records').addClass('show')
-        }, 200);
+    if ('{{ activeIfRoute(['nhapkho.index','muahang.index','adjustments.index','nhapkho.index'] ) }}') {
+        setTimeout(function() { $('ul#Records').addClass('show') } ,200);
     }
 
-    $('ul#breadcrumb').html('<li class="breadcrumb-item"><a href="/">Home</a></li>' +
+    $('ul#breadcrumb').html('<li class="breadcrumb-item"><a href="/">Home</a></li>'+
         '<li class="breadcrumb-item active"> ' + document.title + '</li>');
+
 </script>
 
 </html>
