@@ -43,6 +43,7 @@ Route::group(
             Route::resource($prefix, $controller)->except(['edit', 'update', 'destroy']);
         }
         Route::resource('/muahang', 'MuahangController');
+        Route::resource('/luong', 'LuongController');
         Route::resource('/banhang', 'BanhangController');
         Route::resource('/mathang', 'MathangController');
         Route::resource('invoices', 'InvoiceController');

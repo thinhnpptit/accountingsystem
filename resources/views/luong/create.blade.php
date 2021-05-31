@@ -1,33 +1,43 @@
 @extends('layouts.app')
 
 @section('header')
-    <title>Phiếu mua hàng</title>
+    <title>Tạo mới lương nhân viên</title>
 @endsection
 
 @section('content')
 
     <div class="col-lg-12">
         <div class="block">
-            <div class="title"><strong>Thêm phiếu mua hàng</strong></div>
+            <div class="title"><strong>Tạo mới lương nhân viên</strong></div>
             <div class="block-body">
-                <form name="form" id="form1" action="{{ route("muahang.store")}}" method="post" class="form-horizontal">
+                <form name="form" id="form1" action="{{ route("luong.store")}}" method="post" class="form-horizontal">
                     @csrf
                     <div id="HTMLtoPDF">
                         <div class="form-group row" id='NoAndDate'>
                             <div class="col-sm-9">
-                                <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Loại phiếu</label>
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <label class="col-md-4 control-label" for="selectbasic">Phân loại</label>
-                                        <select id="selectbasic" name="phanloai" value="{{ old('selectbasic') }}"
+                                        <label class="col-md-12 control-label" for="selectbasic">Chọn tháng tính lương</label>
+                                        <select id="selectbasic" name="thang" value="{{ old('selectbasic') }}"
                                                 class="form-control">
-                                            <option value="Mua hàng trong nước nhập kho">Mua hàng trong nước nhập kho</option>
-                                            <option value="Mua hàng trong nước không qua kho">Mua hàng trong nước không qua kho</option>
+                                            <option value="1">Tháng 1</option>
+                                            <option value="2">Tháng 2</option>
+                                            <option value="3">Tháng 3</option>
+                                            <option value="4">Tháng 4</option>
+                                            <option value="5">Tháng 5</option>
+                                            <option value="6">Tháng 6</option>
+                                            <option value="7">Tháng 7</option>
+                                            <option value="8">Tháng 8</option>
+                                            <option value="9">Tháng 9</option>
+                                            <option value="10">Tháng 10</option>
+                                            <option value="11">Tháng 11</option>
+                                            <option value="12">Tháng 12</option>
+                                        
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="col-md-8 control-label" for="selectbasic"
-                                               class="form-control">Ngày xuất phiếu</label>
+                                               class="form-control">Ngày tạo</label>
                                         <input type="date" id="datevalue" name="ngaymua" class="form-control"
                                                value="{{ old('datevalue') ?? "2021-00-00 " }}"
                                         />
@@ -39,7 +49,7 @@
                         <div class="form-group row" id='ChartaccountTopLine'>
                             <div class="col-sm-12">
                                 <div class="row">
-                                    <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Nhân viên mua hàng</label>
+                                    <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Nhân viên</label>
                                     <div class="col-md-3">
                                         <label class="col-md-12 control-label" for="selectbasic">Phòng ban</label>
                                         <div class="show_product"></div>
@@ -74,53 +84,49 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="row">
-                                    <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Danh sách hàng mua</label>
+                                    <label class="col-md-12 control-label font-weight-bold" for="selectbasic" >Nhập các thông tin:</label>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Mặt hàng</label>
+                                        <label class="col-md-12 control-label" for="selectbasic">Tổng công trong tháng (/23 ngày)</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Nhà cung cấp</label>
+                                        <label class="col-md-8 control-label" for="selectbasic">Thưởng tháng này</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Đơn giá</label>
+                                        <label class="col-md-8 control-label" for="selectbasic">Lương cơ bản</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
+                                        <label class="col-md-8 control-label" for="selectbasic">Thuế suất</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @for ($i = 1; $i <= 5; $i++) <div class="form-group row" id='line{{$i}}'>
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <input class="form-control" type="text" name="tenMH{{$i}}" value="{{ old('tenMH' . $i) }}">
+                                        <input class="form-control" type="text" name="cong" value="{{ old('cong') }}">
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" type="text" name="nhaCC{{$i}}" value="{{ old('nhaCC' . $i) }}">
+                                        <input class="form-control" type="text" name="thuong" value="{{ old('thuong') }}">
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="form-control" type="text" name="dongia{{$i}}" value="{{ old('dongia' . $i) }}">
+                                        <input class="form-control" type="text" name="coban" value="{{ old('coban') }}">
                                     </div>
                                     <div class="col-md-3">
-                                        <input class="col-md-8 form-control" id="soluong{{$i}}" v-model="v{{$i}}"
-                                               name="soluong{{$i}}" value="{{ old('soluong' . $i )}}" placeholder="1"
-                                               type="number" vueAttribute='v{{$i}}'>
+                                        <select class="form-control" name="thue">
+                                            <option value="5">5% (Đến 5 triệu đồng/tháng)</option>
+                                            <option value="10">10% (Trên 5 triệu đến 10 triệu đồng/tháng)</option>
+                                            <option value="15">15% (Trên 10 triệu đến 18 triệu đồng/tháng)</option>
+                                            <option value="20">20% (Trên 18 triệu đến 32 triệu đồng/tháng)</option>
+                                            <option value="25">25% (Trên 32 triệu đến 52 triệu đồng/tháng)</option>
+                                            <option value="30">30% (Trên 52 triệu đến 80 triệu đồng/tháng)</option>
+                                            <option value="35">35% (Trên 80 triệu đồng/tháng)</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @endfor
                         <hr>
                         <div class="form-group row" id='totals'>
-                            <div class="col-sm-9">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label class="col-md-4 control-label" for="selectbasic">Thành tiền</label>
-                                        <input class="form-control" type="text" name="thanhtien">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="form-horizontal" id='through'>
                             <div class="form-group row" id='buttons'>
@@ -128,7 +134,7 @@
                                     <button type="button" onclick="cancel()" class="btn btn-secondary">Hủy</button>
                                     <button type="button" onclick="showAll()" class="btn btn-primary" name="btnshow"
                                             id="btnadd">Xem danh sách</button>
-                                    <button type="submit" class="btn btn-primary" name="btnadd" id="btnadd" onclick="save()">Lưu phiếu</button>
+                                    <button type="submit" class="btn btn-primary" name="btnadd" id="btnadd" onclick="save()">Tính lương</button>
                                 </div>
                             </div>
                         </div>
@@ -194,11 +200,11 @@
         }
 
         function showAll(){
-            location.href="{{ route("muahang.index") }}"
+            location.href="{{ route("luong.index") }}"
         }
 
         function save() {
-            location.href=" {{ route("muahang.store") }} "
+            location.href=" {{ route("luong.store") }} "
         }
 
         function applyOldValues(old){
