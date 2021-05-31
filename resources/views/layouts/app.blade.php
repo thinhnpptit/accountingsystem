@@ -151,8 +151,8 @@
                                 class="fa fa-file-text-o"></i>Quản lý Mặt hàng</a></li>
                         <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('chi.create') }}"> <i
                                     class="icon-padnote"></i>Phiếu chi </a></li>
-                        <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
-                                    class="icon-padnote"></i>Bảng Chấm Công</a></li>
+                        <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('thu.create') }}"> <i
+                                    class="icon-padnote"></i>Phiếu thu</a></li>
                         <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
                             <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>Quản Lý Lương</a>

@@ -49388,6 +49388,7 @@ window.VueApp = new Vue({
     subaccounts: [],
       mathangs: [],
       muahangs: [],
+      banhangs: [],
     subaccounts1: [],
     CreditDebit: null,
     chartaccounts: [],
@@ -49427,6 +49428,9 @@ window.VueApp = new Vue({
           Vue.nextTick(this.setupDataTable);
       },
       muahangs: function muahangs() {
+          Vue.nextTick(this.setupDataTable);
+    },
+      banhangs: function banhangs() {
           Vue.nextTick(this.setupDataTable);
       },
     chartaccount: function chartaccount(chartid) {
@@ -49711,6 +49715,19 @@ window.VueApp = new Vue({
 
               vm.destroyDataTable();
               vm.muahangs = result.data.muahangs;
+          });
+    },
+      getBanhangs: function getBanhangs() {
+          var table_selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+          var vm = this;
+          axios.get('/api/banhangs').then(function (result) {
+              if (table_selector) {
+                  vm.dataTable(table_selector, options);
+              }
+
+              vm.destroyDataTable();
+              vm.banhangs = result.data.banhangs;
           });
       },
     getSubaccounts: function getSubaccounts() {

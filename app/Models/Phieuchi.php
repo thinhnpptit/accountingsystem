@@ -9,7 +9,7 @@ class Phieuchi extends Model
     protected $fillable = ['nhan_vien_id',	'ngay',	'noi_dung',	'tong_chi'];
     protected $table = 'phieu_chi';
 
-    public function muahangs(){
-        return $this->belongsToMany(PhieuMuaHang::class, 'phieu_chi_mua_hang', 'muahang_id', 'phieuchi_id')->withPivot('so_tien');
+    public function muahang(){
+        return $this->belongsToMany(PhieuMuaHang::class, 'phieu_chi_mua_hang','phieuchi_id', 'muahang_id')->withPivot('so_tien');
     }
 }
