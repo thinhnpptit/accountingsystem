@@ -82,10 +82,10 @@
                                         <label class="col-md-12 control-label" for="selectbasic">Tên mặt hàng</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Đơn giá</label>
+                                        <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="col-md-8 control-label" for="selectbasic">Số lượng</label>
+                                        <label class="col-md-8 control-label" for="selectbasic">Đơn giá</label>
                                     </div>
                                 </div>
                                 @foreach($mathangs as $kc)
