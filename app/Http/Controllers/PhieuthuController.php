@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HoaDonBanHang;
 use App\Models\MatHang;
 use App\Models\NhanVien;
-use App\Models\HoaDonBanHang;
-use App\Models\PhieuNhapKho;
-use App\Models\PhieuXuatKho;
+use App\Models\Phieuthu;
+use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class XuatkhoController extends Controller
+class PhieuthuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,10 @@ class XuatkhoController extends Controller
      */
     public function index()
     {
-        $xuat = PhieuXuatKho::all();
+        $thu = Phieuthu::all();
 
-        return view('xuatkho.index', compact('xuat'));
+        return view('thu.index', compact('thu'));
+
     }
 
     /**
@@ -31,10 +32,10 @@ class XuatkhoController extends Controller
      */
     public function create()
     {
-        $mathangs = MatHang::all();
         $nhanvien = NhanVien::all();
+        $banhangs = HoaDonBanHang::all();
 
-        return view('xuatkho.create', compact('mathangs', 'nhanvien'));
+        return view('thu.create', compact('nhanvien', 'banhangs'));
     }
 
     /**
@@ -45,29 +46,30 @@ class XuatkhoController extends Controller
      */
     public function store(Request $request)
     {
-        $xuatkho = new PhieuXuatKho();
-        $xuatkho->ngay_xuat = $request->ngay;
-        $xuatkho->nhanvien_id = $request->nhanvien;
-        $xuatkho->tong_hang = $request->tongso;
-        $xuatkho->ly_do = $request->lydo;
-        $xuatkho->tong_tien = $request->thanhtien;
-        $xuatkho->save();
+        $thu = new Phieuthu();
+        $thu->nhan_vien_id = $request->nhanvien;
+        $thu->ngay = $request->ngay;
+        $thu->noi_dung = $request->lydo5;
+        $thu->tong_thu = $request->thanhtien;
+        $thu->save();
+
         for ($i=1; $i<6; $i++)
         {
             $id = 'maMH'.$i;
-            $gia = 'gia'.$i;
-            $so = 'value'.$i;
+            $tien = 'tien'.$i;
             if (isset($request->$id ))
             {
-                $MH = MatHang::find($request->$id);
-                $trongkho = $MH->so_luong_trong_kho - $request->$so;
-                $MH->update([
-                    'so_luong_trong_kho' => $trongkho]);
-                $xuatkho->mathang()->attach($MH->id, ['so_luong' => $request->$so, 'don_gia' => $request->$gia]);
+                $MH = HoaDonBanHang::find($request->$id);
+                $MH->update(['phieuthu_id' => $thu->id]);
+                $thu->banhang()->attach($MH->id, ['so_tien' => $request->$tien]);
+            } else{
+                if($request->$tien > 0){
+                    $thu->banhang()->attach(0, ['so_tien' => $request->$tien]);
+                }
             }
         }
 
-        return redirect()->route('xuatkho.create')->with('Add success');
+        return redirect(route('thu.create'));
     }
 
     /**
@@ -78,12 +80,12 @@ class XuatkhoController extends Controller
      */
     public function show($id)
     {
-        $xuat = PhieuXuatKho::find($id);
-        $khoan = DB::table('mat_hang_phieu_xuat_kho')
-            ->where('phieu_xuat_kho_id', '=', $id)
+        $thu = Phieuthu::find($id);
+        $khoanthu = DB::table('phieu_thu_ban_hang')
+            ->where('phieuthu_id', '=', $id)
             ->get();
 
-        return view('xuatkho.show', compact('xuat', 'khoan'));
+        return view('thu.show', compact('thu', 'khoanthu'));
     }
 
     /**

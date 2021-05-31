@@ -62,13 +62,13 @@ class PhieuchiController extends Controller
                 $MH->update(['hoadon_id' => $chi->id]);
                 $chi->muahang()->attach($MH->id, ['so_tien' => $request->$tien]);
             } else{
-                if(isset($request->$tien)){
+                if($request->$tien > 0){
                     $chi->muahang()->attach(0, ['so_tien' => $request->$tien]);
                 }
             }
         }
 
-        return redirect(route('chi.create'));
+        return redirect(route('chi.index'));
     }
 
     /**

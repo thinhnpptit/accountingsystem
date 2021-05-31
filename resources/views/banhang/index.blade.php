@@ -28,7 +28,7 @@
                                     <th>Nhân Viên</th>
                                     <th>Tổng Tiền</th>
                                     <th>Khách hàng</th>
-                                    <th>In Hoá Đơn</th>
+                                    <th>Xem chi tiết Hoá Đơn</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +39,7 @@
                                     <td>{{ App\Models\NhanVien::find($p->nhanvien_id)->tenNV  }}</td>
                                     <td>{{ $p->thanhtien   }}</td>
                                     <td>{{ $p->khachhang }}</td>
-                                    <td><a href="{{ route('banhang.show',$p->id)}}">In</a> </td>
+                                    <td><a href="{{ route('banhang.show',$p->id)}}">Xem chi tiết</a> </td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -151,16 +151,16 @@
                                 class="fa fa-file-text-o"></i>Quản lý Mặt hàng</a></li>
                         <li {{ activeIfRoute('SupplierI') }}><a href="{{ route('chi.create') }}"> <i
                                     class="icon-padnote"></i>Phiếu chi </a></li>
-                        <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('adjustments.create') }}"> <i
-                                    class="icon-padnote"></i>Bảng Chấm Công</a></li>
+                        <li {{ activeIfRoute('adjustments.create') }}><a href="{{ route('thu.create') }}"> <i
+                                    class="icon-padnote"></i>Phiếu thu</a></li>
                         <li {{ activeIfRoute(['chartaccounts.create','accounts.create'])}}>
                             <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i
                                     class="icon-windows"></i>Quản Lý Lương</a>
                             <ul id="Accounts" class="collapse list-unstyled ">
-                                <li {{ activeIfRoute('chartaccounts.create') }}><a
-                                        href="{{ route('chartaccounts.create') }}">Bảng Chấm Công</a></li>
-                                <li {{ activeIfRoute('accounts.create') }}><a
-                                        href="{{ route('accounts.create') }}">Bảng Lương</a></li>
+                                <li {{ activeIfRoute('luong.create') }}><a
+                                        href="{{ route('luong.create') }}">Tạo mới Lương</a></li>
+                                <li {{ activeIfRoute('luong.index') }}><a
+                                        href="{{ route('luong.index') }}">Bảng Lương</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Danh sách phiếu xuất kho</title>
+<title>Bảng lương nhân viên</title>
 @section('header')
 
 <link rel="stylesheet" type="text/css" href="/core/css/datatable.css">
@@ -14,7 +14,7 @@
 @section('content')
 <div class="col-lg-12" cloak>
     <div class="block">
-        <div class="title"><strong>Danh sách phiếu xuất kho</strong></div>
+        <div class="title"><strong>Bảng lương nhân viên</strong></div>
         <div class="block-body">
             <form name="form" id="form1" action="" method="post">
                 <br>
@@ -23,35 +23,36 @@
                         <table id="tables" class="display">
                             <thead>
                                 <tr class="table-active">
-                                    <th class="table-danger">Số phiếu</th>
-                                    <th>Nhân viên nhận</th>
-                                    <th>Ngày xuất</th>
-                                    <th>Tổng hàng xuất</th>
-                                    <th>Lý do xuat</th>
-                                    <th>In phiếu</th>
-                                    <th>Xem chi tiết</th>
-                                    <th>Sửa/Xóa</th>
+                                    <th>Tháng Lương số</th>
+                                    <th>Mã NV</th>
+                                    <th>Tên NV</th>
+                                    <th>Tổng công</th>
+                                    <th>Thưởng tháng</th>
+                                    <th>Lương cơ bản</th>
+                                    <th>Tổng lương</th>
+                                    <th>Thuế thu nhập CN</th>
+                                    <th>Bảo hiểm CN</th>
+                                    <th>Lương nhận</th>
+                                    <th>Trạng thái</th>
+                                    <th>Cập nhật</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($xuat as $p)
+                                @foreach ($luong as $p)
                                 <tr>
-                                    <td class="table-active">{{ $p->id  }}</td>
+                                    <td>{{ $p->thang }}</td>
+                                    <td class="table-active">{{ $p->nhanvien_id  }}</td>
                                      <td>{{ \App\Models\NhanVien::find($p->nhanvien_id)->tenNV }}</td>
-                                    <td>{{ $p->ngay_xuat   }}</td>
-                                    <td class="table-active">{{ $p->tong_hang   }}</td>
-                                    <td>{{ $p->ly_do }}</td>
-                                    <td><a href="{{ route('xuatkho.show',$p->id)}}">In Phiếu</a> </td>
-                                    <td><a href="{{ route('xuatkho.show',$p->id)}}">Xem chi tiết</a></td>
-                                    <td>
-                                        <a href="{{ route('xuatkho.edit', $p->id)}}">Sửa</a> |
-                                        <a href="#" onclick="$('form#invoice_delete_{{$p->id}}').trigger('submit')">Xóa</a>
-                                        <div style='display=none'>
-                                            <form id='invoice_delete_{{$p->id}}' method='POST' action="{{ route('xuatkho.destroy', $p->id)}}" >
-                                                @method('DELETE')
-                                                @csrf
-                                            </form>
-                                        </div>
+                                    <td class="table-active">{{ $p->tongcong   }}</td>
+                                    <td>{{ number_format( $p->tienthuong)   }}</td>
+                                    <td class="table-active">{{ number_format( $p->luongcoban ) }}</td>
+                                    <td>{{ number_format( $p->tongluong ) }}</td>
+                                    <td class="table-active">{{ number_format( $p->thuecanhan ) }}</td>
+                                    <td>{{ number_format( $p->bhyt ) }}</td>
+                                    <td class="table-active">{{ number_format( $p->tongluong ) }}</td>
+                                    <td>{{ $p->trangthai }}
+                                    <td class="table-active">
+                                        <a href="{{ route('luong.edit', $p->id)}}">Thanh toán</a>
                                     </td>
                                 </tr>
                                 @endforeach
