@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/muahang/create';
+    protected $redirectTo = '/payment';
 
     /**
      * Create a new controller instance.
