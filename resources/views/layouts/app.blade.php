@@ -146,6 +146,14 @@
                     </ul>
                 </li>
 
+                <li {{ activeIfRoute(['chi.create','thu.create'])}}>
+                    <a href="ul#Quy" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Quản lý Quỹ</a>
+                    <ul id="Quy" class="collapse list-unstyled ">
+                        <li {{ activeIfRoute('chi.create') }}><a href="{{ route('chi.create') }}"> Phiếu Chi Quỹ </a></li>
+                        <li {{ activeIfRoute('thu.create') }}><a href="{{ route('thu.create') }}"> Phiếu Thu Quỹ </a></li>
+                    </ul>
+                </li>
+
                 <li {{ activeIfRoute(['luong.create','luong.index'])}}>
                     <a href="ul#Accounts" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Quản lý Lương</a>
                     <ul id="Accounts" class="collapse list-unstyled ">
