@@ -47,6 +47,7 @@ Route::group(
         Route::resource('/mathang', 'MathangController');
         Route::resource('invoices', 'InvoiceController');
         Route::resource('/chi', 'PhieuchiController');
+        Route::resource('/thu', 'PhieuthuController');
         Route::resource('/nhapkho', 'NhapKhoController');
         Route::resource('/xuatkho', 'XuatkhoController');
 
@@ -97,6 +98,13 @@ Route::middleware('auth')->prefix('api/')->group(
             function (Request $request) {
                 $muahangs = \App\Models\PhieuMuaHang::all();
                 return compact('muahangs');
+            }
+        );
+        Route::get(
+            'banhangs',
+            function (Request $request) {
+                $banhangs = \App\Models\HoaDonBanHang::all();
+                return compact('banhangs');
             }
         );
 
@@ -191,6 +199,22 @@ Route::middleware('auth')->prefix('api/')->group(
                 return compact('mhh');
             }
         )->name('muahangInfo');
+
+        Route::get(
+            'banInfo',
+            function (Request $request) {
+                $ma = request('ma');
+                Log::debug($ma);
+                $mh = \App\Models\HoaDonBanHang::all()->groupBy('id');
+                if ($mh) {
+                    $mhh = $mh->get($ma);
+                } else {
+                    return 0;
+                }
+                return compact('mhh');
+            }
+        )->name('banhangInfo');
+
     }
 );
 

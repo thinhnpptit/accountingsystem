@@ -6,6 +6,7 @@ use App\Models\MatHang;
 use App\Models\NhanVien;
 use App\Models\HoaDonBanHang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BanhangController extends Controller
 {
@@ -48,11 +49,13 @@ class BanhangController extends Controller
             $id = 'maMH'.$i;
             $gia = 'gia'.$i;
             $so = 'value'.$i;
+            $ten = 'tenMH'.$i;
             if (isset($request->$id ))
             {
-                $MH = array('id:'.$request->$id,
-                    'dongia:'.$request->$gia,
-                    'soluong:'.$request->$so);
+                $MH = array($request->$id,
+                    $request->$gia,
+                    $request->$so,
+                    $request->$ten);
                 $bangMH[$i] = implode(',',$MH);
             }
         }
@@ -76,7 +79,20 @@ class BanhangController extends Controller
      */
     public function show($id)
     {
-        //
+        $ban = HoaDonBanHang::find($id);
+        $mathangs = array();
+        $arr = explode(";",$ban->bang_mathang);
+        foreach ($arr as $ar) {
+            $mh = explode(',',$ar);
+            $m = array(
+                'id' => $mh[0],
+                'tenMH' => $mh[3],
+                'soluong' => $mh[2],
+                'dongia' => $mh[1],            );
+            $mathangs[] = $m;
+        }
+
+        return view('banhang.show', compact('ban', 'mathangs'));
     }
 
     /**
