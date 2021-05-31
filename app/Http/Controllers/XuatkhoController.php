@@ -8,6 +8,7 @@ use App\Models\HoaDonBanHang;
 use App\Models\PhieuNhapKho;
 use App\Models\PhieuXuatKho;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class XuatkhoController extends Controller
 {
@@ -18,9 +19,9 @@ class XuatkhoController extends Controller
      */
     public function index()
     {
-        $banhangs = PhieuXuatKho::all();
+        $xuat = PhieuXuatKho::all();
 
-        return view('xuatkho.index', compact('xuatkhos'));
+        return view('xuatkho.index', compact('xuat'));
     }
 
     /**
@@ -77,7 +78,12 @@ class XuatkhoController extends Controller
      */
     public function show($id)
     {
-        //
+        $xuat = PhieuXuatKho::find($id);
+        $khoan = DB::table('mat_hang_phieu_xuat_kho')
+            ->where('phieu_xuat_kho_id', '=', $id)
+            ->get();
+
+        return view('xuatkho.show', compact('xuat', 'khoan'));
     }
 
     /**
