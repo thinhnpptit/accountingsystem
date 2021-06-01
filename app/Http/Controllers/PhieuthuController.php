@@ -77,7 +77,7 @@ class PhieuthuController extends Controller
      */
     public function show($id)
     {
-        $thu = Phieuthu::find($id);
+        $thu = PhieuThu::find($id);
         $khoanthu = DB::table('phieu_thu_ban_hang')
             ->where('phieuthu_id', '=', $id)
             ->get();
