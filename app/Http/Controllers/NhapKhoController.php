@@ -53,27 +53,35 @@ class NhapKhoController extends Controller
         $nhapkho->tong_tien = $request->tongtien;
         $nhapkho->save();
 
-        for ($i = 0; $i < count($tenMHs); $i++) {
-            $isMathang = MatHang::where('tenMH', '=', $tenMHs[$i])->first();
-            $mh = new MatHang();
-            $mh->tenMH = $tenMHs[$i];
-            $mh->nhaCC = $request->nhacc;
-            $mh->don_gia = $dongias[$i];
-            $mh->don_vi_tinh = $donvis[$i];
-            $mh->so_luong_trong_kho = $soluongs[$i];
-            $mh->nhapkho->so_luong_nhap = $soluongs[$i];
-            $mh->so_luong_uoc_tinh = 0;
+        for ($i = 0; $i < 6; $i++) {
+            $tenmh = 'tenMH' . $i;
+            $dg = 'dongia' . $i;
+            $dv = 'donvi' . $i;
+            $sl = 'soluong' . $i;
+            if (isset($request->$tenmh)) {
+                $isMathang = MatHang::where('tenMH', '=', $tenMHs[$i])->first();
+                $mh = new MatHang();
+                $mh->tenMH = $request->$tenmh;
+                $mh->nhaCC = $request->nhacc;
+                $mh->don_gia = $request->$dg;
+                $mh->don_vi_tinh = $request->$dv;
+                $mh->so_luong_trong_kho = $request->$sl;
+                $mh->nhapkho->so_luong_nhap = $request->$sl;
+                $mh->so_luong_uoc_tinh = 0;
 
-            if ($isMathang != null) {
-                $isMathang->update(array(
-                    'nhaCC' => $request->nhacc,
-                    'so_luong_trong_kho' => $isMathang->so_luong_trong_kho + $soluongs[$i],
-                    'so_luong_nhap' => $isMathang->nhapkho->so_luong_nhap + $soluongs[$i],
-                ));
-                $nhapkho->mathang()->attach($isMathang->id, ['so_luong_nhap' => $soluongs[$i]]);
-            } else {
-                $mh->save();
-                $nhapkho->mathang()->attach($mh->id, ['so_luong_nhap' => $soluongs[$i]]);
+                echo $mh;
+
+                if ($isMathang != null) {
+                    $isMathang->update([
+                        'nhaCC' => $request->nhacc,
+                        'so_luong_trong_kho' => $isMathang->so_luong_trong_kho + $request->$sl,
+                        'so_luong_nhap' => $isMathang->nhapkho->so_luong_nhap + $request->$sl,
+                    ]);
+                    $nhapkho->mathang()->attach($isMathang->id, ['so_luong_nhap' => $request->$sl]);
+                } else {
+                    $mh->save();
+                    $nhapkho->mathang()->attach($mh->id, ['so_luong_nhap' => $request->$sl]);
+                }
             }
         }
 
