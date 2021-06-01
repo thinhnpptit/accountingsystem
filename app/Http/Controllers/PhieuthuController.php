@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HoaDonBanHang;
 use App\Models\MatHang;
 use App\Models\NhanVien;
-use App\Models\Phieuthu;
+use App\Models\PhieuThu;
 use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +19,9 @@ class PhieuthuController extends Controller
      */
     public function index()
     {
-        $thu = Phieuthu::all();
+        $thu = PhieuThu::all();
 
         return view('thu.index', compact('thu'));
-
     }
 
     /**
@@ -53,17 +52,15 @@ class PhieuthuController extends Controller
         $thu->tong_thu = $request->thanhtien;
         $thu->save();
 
-        for ($i=1; $i<6; $i++)
-        {
-            $id = 'maMH'.$i;
-            $tien = 'tien'.$i;
-            if (isset($request->$id ))
-            {
+        for ($i = 1; $i < 6; $i++) {
+            $id = 'maMH' . $i;
+            $tien = 'tien' . $i;
+            if (isset($request->$id)) {
                 $MH = HoaDonBanHang::find($request->$id);
                 $MH->update(['phieuthu_id' => $thu->id]);
                 $thu->banhang()->attach($MH->id, ['so_tien' => $request->$tien]);
-            } else{
-                if($request->$tien > 0){
+            } else {
+                if ($request->$tien > 0) {
                     $thu->banhang()->attach(0, ['so_tien' => $request->$tien]);
                 }
             }
