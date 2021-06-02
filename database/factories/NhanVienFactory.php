@@ -12,7 +12,7 @@ $factory->define(NhanVien::class, function (Faker $faker) {
         //
         'tenNV' => $faker->name($gender = null),
         'email' => $faker->unique()->freeEmail,
-        'sdt' => $faker->e164PhoneNumber,
+        'sdt' => $faker->phoneNumber,
         'taikhoan_id' => TaiKhoan::all()->random()->id,
         'vitri_id' => ViTri::all()->random()->id,
     ];

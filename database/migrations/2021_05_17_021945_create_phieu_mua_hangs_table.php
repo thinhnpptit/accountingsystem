@@ -16,9 +16,9 @@ class CreatePhieuMuaHangsTable extends Migration
         Schema::create('phieu_mua_hangs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('phan_loai');
-            $table->string('nha_cc');
-            $table->string('tenMH');
-            $table->string('don_gia');
+            // $table->string('nha_cc');
+            // $table->string('tenMH');
+            // $table->string('don_gia');
             $table->integer('so_luong');
             $table->float('thanh_tien');
             $table->date('ngay_mua');

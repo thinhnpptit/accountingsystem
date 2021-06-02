@@ -16,7 +16,7 @@ class MatHang extends Model
 
     public function nhapkho()
     {
-        return $this->belongsToMany(PhieuNhapKho::class)->withTimestamps()->withPivot('so_luong');
+        return $this->belongsToMany(PhieuNhapKho::class)->withTimestamps();
     }
 
     public function xuatkho()

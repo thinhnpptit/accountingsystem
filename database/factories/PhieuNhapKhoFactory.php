@@ -13,9 +13,9 @@ $factory->define(PhieuNhapKho::class, function (Faker $faker) {
         //
         'ngay_nhap' => $faker->dateTime($max = 'now', $timezone = null),
         'nha_cc' => $faker->numerify('Nha cung cap ##'),
-        'nhanvien_id' => $faker->randomDigitNot(0),
+        'nhanvien_id' => $faker->numberBetween($min = 1, $max = 10),
         'tong_tien' => $faker->randomFloat($nbMaxDicimals = NULL, $min = 1, $max = 1263),
-        'so_luong' => $faker->numberBetween($min = 1, $max = 50),
-        'don_vi' => Arr::random($array)
+        // 'so_luong' => $faker->numberBetween($min = 1, $max = 50),
+        // 'don_vi' => Arr::random($array)
     ];
 });

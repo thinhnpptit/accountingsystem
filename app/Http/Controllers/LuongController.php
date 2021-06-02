@@ -42,14 +42,14 @@ class LuongController extends Controller
     public function store(Request $request)
     {
         $luong = new Luong();
-        $luong->tongcong = $request->cong;
+        $luong->cong = $request->cong;
         $luong->luongcoban = $request->coban;
-        $luong->thang = $request->thang."/".substr($request->ngaymua, 0, 4);
-        $luong->tienthuong= $request->thuong;
+        $luong->thang = $request->thang . "/" . substr($request->ngaymua, 0, 4);
+        $luong->tienthuong = $request->thuong;
         $luong->nhanvien_id = $request->nhanvien;
-        $luong->tongluong =  round(($request->coban/23)*$request->cong+$request->thuong);
-        $luong->bhyt =  round($request->coban*0.015);
-        $luong->thuecanhan =  0.1*$request->coban;
+        $luong->tongluong =  round(($request->coban / 23) * $request->cong + $request->thuong);
+        $luong->bhyt =  round($request->coban * 0.015);
+        $luong->thuecanhan =  0.1 * $request->coban;
         $luong->tongnhan =  round($luong->tongluong - $luong->bhyt - $luong->thuecanhan);
         $luong->trangthai = 'chưa thanh toán';
         $luong->save();
@@ -91,7 +91,6 @@ class LuongController extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**

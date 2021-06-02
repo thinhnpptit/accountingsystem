@@ -43,7 +43,7 @@
                                     <td>{{ $p->thang }}</td>
                                     <td class="table-active">{{ $p->nhanvien_id  }}</td>
                                      <td>{{ \App\Models\NhanVien::find($p->nhanvien_id)->tenNV }}</td>
-                                    <td class="table-active">{{ $p->tongcong   }}</td>
+                                    <td class="table-active">{{ $p->cong   }}</td>
                                     <td>{{ number_format( $p->tienthuong)   }}</td>
                                     <td class="table-active">{{ number_format( $p->luongcoban ) }}</td>
                                     <td>{{ number_format( $p->tongluong ) }}</td>

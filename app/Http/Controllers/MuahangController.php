@@ -67,7 +67,6 @@ class MuahangController extends Controller
         $phieumh->phan_loai = $request->phanloai;
         $phieumh->thanh_tien = $request->thanhtien;
         $phieumh->ngay_mua = $request->ngaymua;
-        $phieumh->hoadon_id = "0";
         $phieumh->nhanvien_id = $request->nhanvien;
         $phieumh->bang_mathang = implode(';', $bangMH);
         $phieumh->save();

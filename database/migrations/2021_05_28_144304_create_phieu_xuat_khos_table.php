@@ -19,7 +19,7 @@ class CreatePhieuXuatKhosTable extends Migration
             $table->bigInteger('nhanvien_id');
             $table->integer('tong_hang');
             $table->string('ly_do');
-            $table->string('nguoi_nhan');
+            // $table->string('nguoi_nhan');
             $table->double('tong_tien');
             $table->timestamps();
         });
