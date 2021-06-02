@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatHang;
+use App\Models\NhanVien;
+use App\Models\Phieuchi;
+use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class MathangController extends Controller
+class PhieuchiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +18,10 @@ class MathangController extends Controller
      */
     public function index()
     {
+        $chi = Phieuchi::all();
 
-        return view('mathang.index');
+        return view('chi.index', compact('chi'));
+
     }
 
     /**
@@ -25,7 +31,10 @@ class MathangController extends Controller
      */
     public function create()
     {
-        return view('mathang.create');
+        $nhanvien = NhanVien::all();
+        $muahangs = PhieuMuaHang::all();
+
+        return view('chi.create', compact('nhanvien', 'muahangs'));
     }
 
     /**
@@ -36,21 +45,30 @@ class MathangController extends Controller
      */
     public function store(Request $request)
     {
-        $mathang = new MatHang([
-            'tenMH' => $request->tenMH,
-            'nhaCC' => $request->nhacc,
-            'don_gia' => $request->gia,
-            'don_vi_tinh' => $request->donvi,
-            'so_luong_trong_kho' => $request->value1,
-<<<<<<< HEAD
-            // 'so_luong_nhap' => 0,
-=======
-//             'so_luong_nhap' => 0,
->>>>>>> upstream/main
-            'so_luong_uoc_tinh' => 0,
-        ]);
-        $mathang->save();
-        return view('mathang.create');
+        $chi = new Phieuchi();
+        $chi->nhan_vien_id = $request->nhanvien;
+        $chi->ngay = $request->ngay;
+        $chi->noi_dung = $request->lydo5;
+        $chi->tong_chi = $request->thanhtien;
+        $chi->save();
+
+        for ($i=1; $i<6; $i++)
+        {
+            $id = 'maMH'.$i;
+            $tien = 'tien'.$i;
+            if (isset($request->$id ))
+            {
+                $MH = PhieuMuaHang::find($request->$id);
+                $MH->update(['hoadon_id' => $chi->id]);
+                $chi->muahang()->attach($MH->id, ['so_tien' => $request->$tien]);
+            } else{
+                if($request->$tien > 0){
+                    $chi->muahang()->attach(0, ['so_tien' => $request->$tien]);
+                }
+            }
+        }
+
+        return redirect(route('chi.index'));
     }
 
     /**
@@ -61,7 +79,12 @@ class MathangController extends Controller
      */
     public function show($id)
     {
-        //
+        $chi = Phieuchi::find($id);
+        $khoanchi = DB::table('phieu_chi_mua_hang')
+            ->where('phieuchi_id', '=', $id)
+            ->get();
+
+        return view('chi.show', compact('chi', 'khoanchi'));
     }
 
     /**

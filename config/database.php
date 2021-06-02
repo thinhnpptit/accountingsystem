@@ -96,6 +96,28 @@ return [
             'engine' => null,
         ],
 
+        // 'mysql' => [
+        //     'driver' => 'mysql',
+        //     'host' => 'db4free.net',
+        //     'port' => '3306',
+        //     'database' => 'ketoan1',
+        //     'username' => 'adminketoan1',
+        //     'password' => '123456a@',
+        //     'unix_socket' =>  '',
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => false,
+        //     'engine' => null,
+        //     'sslmode' => 'require',
+        //     'options'   => array(
+        //         PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+        //         PDO::MYSQL_ATTR_SSL_KEY => '/certs/client-key.pem',
+        //         PDO::MYSQL_ATTR_SSL_CERT => '/certs/client-cert.pem',
+        //         PDO::MYSQL_ATTR_SSL_CA => '/certs/ca.pem',
+        //     ),
+        // ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

@@ -22,20 +22,20 @@ class DatabaseSeeder extends Seeder
         $this->call(ReceiptsSeeder::class);
         $this->call(RecordsSeeder::class);
         $this->call(SubaccountsSeeder::class);
-        //        $this->call(PhieuMuaHangSeeder::class);
-        //        $this->call(MatHangTableSeeder::class);
-        //        $this->call(MuaHangMatHangTableSeeder::class);
+                $this->call(PhieuMuaHangSeeder::class);
+                $this->call(MatHangTableSeeder::class);
+                $this->call(MuaHangMatHangTableSeeder::class);
         $this->call(TaiKhoanTableSeeder::class);
         $this->call(ViTriTableSeeder::class);
         $this->call(NhanVienTableSeeder::class);
-        // $this->call(PhieuNhapKhoSeeder::class);
+         $this->call(PhieuNhapKhoSeeder::class);
 
-        //    User::create([
-        //        'name' => 'admin',
-        //        'password' => bcrypt('101'),
-        //        'email' => 'admin@example.com'
-        //    ]);
-        //
+            User::create([
+                'name' => 'admin',
+                'password' => bcrypt('101'),
+                'email' => 'admin@example.com'
+            ]);
+
         User::create([
             'name' => 'me',
             'password' => bcrypt('password'),

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MatHang;
+use App\Models\Luong;
 use Illuminate\Http\Request;
 
-class MathangController extends Controller
+class LuongController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class MathangController extends Controller
      */
     public function index()
     {
+        $luong = Luong::all();
 
-        return view('mathang.index');
+        return view('luong.index', compact('luong'));
     }
 
     /**
@@ -25,7 +26,11 @@ class MathangController extends Controller
      */
     public function create()
     {
-        return view('mathang.create');
+
+        $phongban =  \App\Models\ViTri::all()->groupBy('phongban')->keys();
+        $vitri = \App\Models\ViTri::all()->groupBy('phongban');
+
+        return view('luong.create', compact('phongban', 'vitri'));
     }
 
     /**
@@ -36,21 +41,20 @@ class MathangController extends Controller
      */
     public function store(Request $request)
     {
-        $mathang = new MatHang([
-            'tenMH' => $request->tenMH,
-            'nhaCC' => $request->nhacc,
-            'don_gia' => $request->gia,
-            'don_vi_tinh' => $request->donvi,
-            'so_luong_trong_kho' => $request->value1,
-<<<<<<< HEAD
-            // 'so_luong_nhap' => 0,
-=======
-//             'so_luong_nhap' => 0,
->>>>>>> upstream/main
-            'so_luong_uoc_tinh' => 0,
-        ]);
-        $mathang->save();
-        return view('mathang.create');
+        $luong = new Luong();
+        $luong->tongcong = $request->cong;
+        $luong->luongcoban = $request->coban;
+        $luong->thang = $request->thang."/".substr($request->ngaymua, 0, 4);
+        $luong->tienthuong= $request->thuong;
+        $luong->nhanvien_id = $request->nhanvien;
+        $luong->tongluong =  round(($request->coban/23)*$request->cong+$request->thuong);
+        $luong->bhyt =  round($request->coban*0.015);
+        $luong->thuecanhan =  0.1*$request->coban;
+        $luong->tongnhan =  round($luong->tongluong - $luong->bhyt - $luong->thuecanhan);
+        $luong->trangthai = 'chưa thanh toán';
+        $luong->save();
+
+        return redirect(route('luong.index'));
     }
 
     /**
@@ -72,7 +76,10 @@ class MathangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $luong = Luong::find($id);
+        $luong->update(['trangthai' => 'Đã thanh toán']);
+
+        return redirect(route('luong.index'));
     }
 
     /**
@@ -84,7 +91,7 @@ class MathangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

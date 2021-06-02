@@ -19,7 +19,6 @@ class NhapKhoController extends Controller
         //
         $nhapkho = PhieuNhapKho::all();
 
-
         return view('nhapkho.index', compact('nhapkho'));
     }
 

@@ -23,4 +23,9 @@ class PhieuMuaHang extends Model
     {
         return $this->belongsToMany(MatHang::class);
     }
+
+    public function chis()
+    {
+        return $this->belongsToMany(Phieuchi::class)->withTimestamps()->withPivot('so_tien');
+    }
 }

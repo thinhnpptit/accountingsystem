@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HoaDonBanHang;
 use App\Models\MatHang;
+use App\Models\NhanVien;
+use App\Models\Phieuthu;
+use App\Models\PhieuMuaHang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class MathangController extends Controller
+class PhieuthuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +19,10 @@ class MathangController extends Controller
      */
     public function index()
     {
+        $thu = Phieuthu::all();
 
-        return view('mathang.index');
+        return view('thu.index', compact('thu'));
+
     }
 
     /**
@@ -25,7 +32,10 @@ class MathangController extends Controller
      */
     public function create()
     {
-        return view('mathang.create');
+        $nhanvien = NhanVien::all();
+        $banhangs = HoaDonBanHang::all();
+
+        return view('thu.create', compact('nhanvien', 'banhangs'));
     }
 
     /**
@@ -36,21 +46,30 @@ class MathangController extends Controller
      */
     public function store(Request $request)
     {
-        $mathang = new MatHang([
-            'tenMH' => $request->tenMH,
-            'nhaCC' => $request->nhacc,
-            'don_gia' => $request->gia,
-            'don_vi_tinh' => $request->donvi,
-            'so_luong_trong_kho' => $request->value1,
-<<<<<<< HEAD
-            // 'so_luong_nhap' => 0,
-=======
-//             'so_luong_nhap' => 0,
->>>>>>> upstream/main
-            'so_luong_uoc_tinh' => 0,
-        ]);
-        $mathang->save();
-        return view('mathang.create');
+        $thu = new PhieuThu();
+        $thu->nhan_vien_id = $request->nhanvien;
+        $thu->ngay = $request->ngay;
+        $thu->noi_dung = $request->lydo5;
+        $thu->tong_thu = $request->thanhtien;
+        $thu->save();
+
+        for ($i=1; $i<6; $i++)
+        {
+            $id = 'maMH'.$i;
+            $tien = 'tien'.$i;
+            if (isset($request->$id ))
+            {
+                $MH = HoaDonBanHang::find($request->$id);
+                $MH->update(['phieuthu_id' => $thu->id]);
+                $thu->banhang()->attach($MH->id, ['so_tien' => $request->$tien]);
+            } else{
+                if($request->$tien > 0){
+                    $thu->banhang()->attach(0, ['so_tien' => $request->$tien]);
+                }
+            }
+        }
+
+        return redirect(route('thu.create'));
     }
 
     /**
@@ -61,7 +80,12 @@ class MathangController extends Controller
      */
     public function show($id)
     {
-        //
+        $thu = Phieuthu::find($id);
+        $khoanthu = DB::table('phieu_thu_ban_hang')
+            ->where('phieuthu_id', '=', $id)
+            ->get();
+
+        return view('thu.show', compact('thu', 'khoanthu'));
     }
 
     /**
