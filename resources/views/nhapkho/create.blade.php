@@ -48,13 +48,13 @@
                                 <div class="col-md-3">
 
                                     <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
-                                    <input class="form-control" name="tenMH[]">
+                                    <input class="form-control" name="tenMH1">
                                 </div>
                                 <div class="col-md-2">
 
                                     <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
 
-                                    <select class="form-control" name="donvi[]">
+                                    <select class="form-control" name="donvi1">
                                         <option value="kg">kg</option>
                                         <option value="chiếc">chiếc</option>
                                         <option value="m">m</option>
@@ -68,26 +68,214 @@
 
                                     <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
 
-                                    <input class="form-control" name="soluong[]">
+                                    <input class="form-control" name="soluong1">
                                 </div>
                                 <div class="col-md-2">
 
                                     <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
 
-                                    <input class="form-control" name="dongia[]">
+                                    <input class="form-control" name="dongia1">
                                 </div>
                                 <div class="col-md-2">
 
                                 </div>
                                 <div class="col-md-1">
-                                    <label class="input_fields col-md-8">
+                                    {{-- <label class="input_fields col-md-8">
                                     </label>
-                                    <button class="add_field_button btn btn-primary">Thêm</button>
+                                    <button class="add_field_button btn btn-primary">Thêm</button> --}}
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                    <div class="form-group row input_fields_wrap" >
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
+                                    <input class="form-control" name="tenMH2">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
+
+                                    <select class="form-control" name="donvi2">
+                                        <option value="kg">kg</option>
+                                        <option value="chiếc">chiếc</option>
+                                        <option value="m">m</option>
+                                        <option value="m2">m2</option>
+                                        <option value="m3">m3</option>
+                                        <option value="lít">lít</option>
+                                        <option value="bộ">bộ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
+
+                                    <input class="form-control" name="soluong2">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
+
+                                    <input class="form-control" name="dongia2">
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                                {{-- <div class="col-md-1">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button btn btn-primary">Thêm</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row input_fields_wrap" >
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
+                                    <input class="form-control" name="tenMH3">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
+
+                                    <select class="form-control" name="donvi3">
+                                        <option value="kg">kg</option>
+                                        <option value="chiếc">chiếc</option>
+                                        <option value="m">m</option>
+                                        <option value="m2">m2</option>
+                                        <option value="m3">m3</option>
+                                        <option value="lít">lít</option>
+                                        <option value="bộ">bộ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
+
+                                    <input class="form-control" name="soluong3">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
+
+                                    <input class="form-control" name="dongia3">
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                                {{-- <div class="col-md-1">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button btn btn-primary">Thêm</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row input_fields_wrap" >
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
+                                    <input class="form-control" name="tenMH4">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
+
+                                    <select class="form-control" name="donvi4">
+                                        <option value="kg">kg</option>
+                                        <option value="chiếc">chiếc</option>
+                                        <option value="m">m</option>
+                                        <option value="m2">m2</option>
+                                        <option value="m3">m3</option>
+                                        <option value="lít">lít</option>
+                                        <option value="bộ">bộ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
+
+                                    <input class="form-control" name="soluong4">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
+
+                                    <input class="form-control" name="dongia4">
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                                {{-- <div class="col-md-1">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button btn btn-primary">Thêm</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row input_fields_wrap" >
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label>
+                                    <input class="form-control" name="tenMH5">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label>
+
+                                    <select class="form-control" name="donvi5">
+                                        <option value="kg">kg</option>
+                                        <option value="chiếc">chiếc</option>
+                                        <option value="m">m</option>
+                                        <option value="m2">m2</option>
+                                        <option value="m3">m3</option>
+                                        <option value="lít">lít</option>
+                                        <option value="bộ">bộ</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label>
+
+                                    <input class="form-control" name="soluong5">
+                                </div>
+                                <div class="col-md-2">
+
+                                    <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label>
+
+                                    <input class="form-control" name="dongia5">
+                                </div>
+                                <div class="col-md-2">
+
+
+                                </div>
+                                {{-- <div class="col-md-1">
+                                    <label class="input_fields col-md-8">
+                                    </label>
+                                    <button class="add_field_button btn btn-primary">Thêm</button>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="line" style='margin-bottom:22px'>  </div>
 
                     <div class="form-group row" id='totals'>
@@ -138,7 +326,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(x < max_fields){ //max input box allowed
 			x++; //text box increment
-			$(wrapper).append('<div><div></div></div><div class="form-group row" style="width:100%; padding: 15px;" > <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label> <input class="form-control" name="tenMH[]"> </div> <div class="col-md-2"> <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label> <select class="form-control" name="donvi[]"> <option value="kg">kg</option> <option value="chiếc">chiếc</option> <option value="m">m</option> <option value="m2">m2</option> <option value="m3">m3</option> <option value="lít">lít</option> <option value="bộ">bộ</option> </select> </div> <div class="col-md-2"> <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label> <input class="form-control" name="soluong[]"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label> <input class="form-control" name="dongia[]"> </div> <div class="col-md-2">  </div><div class="col-md-1"><button class="remove_field col-md-8">Xóa</button></div></div> </div></div></div></div>'); //add input box
+			$(wrapper).append('<div><div></div></div><div class="form-group row" style="width:100%; padding: 15px;" > <div class="col-sm-12"> <div class="row"> <div class="col-md-3"> <label class="col-md-9  control-label" for="selectbasic">Tên Mặt Hàng</label> <input class="form-control" name="tenMH1"> </div> <div class="col-md-2"> <label class="col-md-9  control-label" for="selectbasic">Đơn Vị Tính</label> <select class="form-control" name="donvi1"> <option value="kg">kg</option> <option value="chiếc">chiếc</option> <option value="m">m</option> <option value="m2">m2</option> <option value="m3">m3</option> <option value="lít">lít</option> <option value="bộ">bộ</option> </select> </div> <div class="col-md-2"> <label class="col-md-12  control-label" for="selectbasic">Số Lượng</label> <input class="form-control" name="soluong1"> </div> <div class="col-md-2"> <label class="col-md-12 control-label" for="selectbasic">Đơn Giá</label> <input class="form-control" name="dongia1"> </div> <div class="col-md-2">  </div><div class="col-md-1"><button class="remove_field col-md-8">Xóa</button></div></div> </div></div></div></div>'); //add input box
 		}
 	});
 

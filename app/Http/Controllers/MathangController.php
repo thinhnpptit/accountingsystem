@@ -42,11 +42,7 @@ class MathangController extends Controller
             'don_gia' => $request->gia,
             'don_vi_tinh' => $request->donvi,
             'so_luong_trong_kho' => $request->value1,
-<<<<<<< HEAD
             // 'so_luong_nhap' => 0,
-=======
-//             'so_luong_nhap' => 0,
->>>>>>> upstream/main
             'so_luong_uoc_tinh' => 0,
         ]);
         $mathang->save();
