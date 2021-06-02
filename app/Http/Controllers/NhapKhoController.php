@@ -42,10 +42,6 @@ class NhapKhoController extends Controller
     public function store(Request $request)
     {
         $nhapkho = new PhieuNhapKho;
-        $tenMHs = $request->tenMH;
-        $dongias = $request->dongia;
-        $soluongs = $request->soluong;
-        $donvis = $request->donvi;
 
         $nhapkho->ngay_nhap = $request->ngaynhap;
         $nhapkho->nha_cc = $request->nhacc;
@@ -59,7 +55,7 @@ class NhapKhoController extends Controller
             $dv = 'donvi' . $i;
             $sl = 'soluong' . $i;
             if (isset($request->$tenmh)) {
-                $isMathang = MatHang::where('tenMH', '=', $tenMHs[$i])->first();
+                $isMathang = MatHang::where('tenMH', '=', $request->$tenmh)->first();
                 $mh = new MatHang();
                 $mh->tenMH = $request->$tenmh;
                 $mh->nhaCC = $request->nhacc;
@@ -68,8 +64,6 @@ class NhapKhoController extends Controller
                 $mh->so_luong_trong_kho = $request->$sl;
                 $mh->nhapkho->so_luong_nhap = $request->$sl;
                 $mh->so_luong_uoc_tinh = 0;
-
-                echo $mh;
 
                 if ($isMathang != null) {
                     $isMathang->update([
