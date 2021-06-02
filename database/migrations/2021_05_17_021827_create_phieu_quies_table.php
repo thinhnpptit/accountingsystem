@@ -15,7 +15,7 @@ class CreatePhieuQuiesTable extends Migration
     {
         Schema::create('phieu_quies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('nhanvien_id');
+            $table->bigInteger('nhanvien_id');
             $table->date('ngay');
             $table->text('noi_dung');
             $table->float('so_tien_thu');

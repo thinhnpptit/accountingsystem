@@ -17,8 +17,8 @@ class CreatePhieuNhapKhosTable extends Migration
             $table->bigIncrements('id');
             $table->date('ngay_nhap');
             $table->string('nha_cc');
-            $table->integer('nhanvien_id');
-            $table->bigInteger('tong_tien');
+            $table->bigInteger('nhanvien_id');
+            $table->float('tong_tien');
             // $table->integer('so_luong');
             // $table->string('don_vi');
             $table->timestamps();
