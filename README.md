@@ -21,3 +21,7 @@ Step3: Launch the project
 - visit the local site
 - sign-on with username : me and password: password
 - After all, update ".env" in the .ignore file, thanks!
+
+
+App on production: https://accounting-system-app.herokuapp.com/
+username: me / password: password
